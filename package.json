@@ -1,0 +1,22 @@
+{
+  "name": "pg-henry-back",
+  "version": "1.0.0",
+  "description": "Proyecto grupal de henry - backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fransil19/pg-henry-back.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fransil19/pg-henry-back/issues"
+  },
+  "homepage": "https://github.com/fransil19/pg-henry-back#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
