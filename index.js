@@ -1,1 +1,0 @@
-puto el que lee
