@@ -1,22 +1,33 @@
 {
-  "name": "pg-henry-back",
+  "name": "api",
   "version": "1.0.0",
-  "description": "Proyecto grupal de henry - backend",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon -L",
+    "test": "mocha -w ./tests/**/*.spec.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/fransil19/pg-henry-back.git"
-  },
-  "author": "",
+  "author": "Henry",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/fransil19/pg-henry-back/issues"
+  "engines": {
+    "node": ">=12.18.3",
+    "npm": ">=6.14.6"
   },
-  "homepage": "https://github.com/fransil19/pg-henry-back#readme",
   "dependencies": {
-    "express": "^4.18.2"
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "morgan": "^1.10.0",
+    "pg": "^8.5.1",
+    "sequelize": "^6.3.5"
+  },
+  "devDependencies": {
+    "supertest-session": "^4.1.0",
+    "mocha": "^8.2.1",
+    "chai": "^4.2.0",
+    "nodemon": "^2.0.6",
+    "supertest": "^6.0.1"
   }
 }
