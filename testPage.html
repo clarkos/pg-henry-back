@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<HTML>
+  <head>
+    <title>Testing Page using Mocha</title>
+    <link rel="stylesheet" href="node_modules/mocha/mocha.css">
+  </head>
+  <body>
+    <div id="mocha"></div>
+    <script src="node_modules/mocha/mocha.js"></script>
+    <script src="node_modules/chai/chai.js"></script>
+    <script>mocha.setup('bdd')</script>
+
+    <!-- INSERT HERE all the test suites to run -->
+    <!-- <script src="tests/multiplyTest.js"></script> -->
+    
+    <!-- INSERT HERE all the files to test -->
+    <!-- <script src="multiply.js"></script> -->
+    
+    <script>
+      mocha.run();
+    </script>
+  </body>
+</html>
