@@ -152,7 +152,7 @@ const  setAllDb = async() => {
 
             photo : [
                 {
-                    path: 'c:',
+                    path: 'https://res.cloudinary.com/dfuozesaq/image/upload/v1675357471/HenryMusic/clasica5_hb1l2j.jpg',
                 }
             ]
         },
@@ -163,7 +163,7 @@ const  setAllDb = async() => {
             description: 'The Music Virtuosos te invita a una noche de música clásica de alto nivel. Con nuestros solistas de renombre y nuestro director, te llevaremos en un viaje a través de la historia de la música, desde la época barroca hasta la época clásica.',
             startDate: '2023-03-03',
             endDate: '2023-03-03',
-            startTime: '13:00:00',
+            startTime: '22:00:00',
             stock: 550,
             price: 1600,
             categories : [
@@ -174,7 +174,7 @@ const  setAllDb = async() => {
 
             photo : [
                 {
-                    path: 'c:',
+                    path: 'https://res.cloudinary.com/dfuozesaq/image/upload/v1675357471/HenryMusic/clasica2_xrsdiu.jpg',
                 }
             ]
         },
@@ -196,7 +196,7 @@ const  setAllDb = async() => {
 
             photo : [
                 {
-                    path: 'c:',
+                    path: 'https://res.cloudinary.com/dfuozesaq/image/upload/v1675357471/HenryMusic/clasica4_tkjmpg.jpg',
                 }
             ]
         },
@@ -218,7 +218,7 @@ const  setAllDb = async() => {
 
             photo : [
                 {
-                    path: 'c:',
+                    path: 'https://res.cloudinary.com/dfuozesaq/image/upload/v1675357471/HenryMusic/clasica1_qczq9m.jpg',
                 }
             ]
         },
@@ -240,7 +240,7 @@ const  setAllDb = async() => {
 
             photo : [
                 {
-                    path: 'c:',
+                    path: 'https://res.cloudinary.com/dfuozesaq/image/upload/v1675357471/HenryMusic/clasica3_vs5hs3.jpg',
                 }
             ]
         },
@@ -264,7 +264,7 @@ const  setAllDb = async() => {
 
             photo : [
                 {
-                    path: 'c:',
+                    path: 'https://res.cloudinary.com/dfuozesaq/image/upload/v1675357467/HenryMusic/electronic2_sfqeaj.jpg',
                 }
             ]
         },
@@ -286,7 +286,7 @@ const  setAllDb = async() => {
 
             photo : [
                 {
-                    path: 'c:',
+                    path: 'https://res.cloudinary.com/dfuozesaq/image/upload/v1675357467/HenryMusic/electronic5_zcnhgd.jpg',
                 }
             ]
         },
@@ -295,7 +295,7 @@ const  setAllDb = async() => {
             artistId: 8,
             name: 'Electro Visionary Live',
             description: 'Si te encanta la música que hace vibrar el cuerpo y la mente, entonces Electro Visionary es la opción correcta. La banda electrónica es conocida por sus ritmos infecciosos y su capacidad de crear un ambiente de fiesta.',
-            startDate: '2023-03-06',
+            startDate: '2023-03-05',
             endDate: '2023-03-06',
             startTime: '12:00:00',
             stock: 1100,
@@ -308,7 +308,7 @@ const  setAllDb = async() => {
 
             photo : [
                 {
-                    path: 'c:',
+                    path: 'https://res.cloudinary.com/dfuozesaq/image/upload/v1675357467/HenryMusic/electronic4_uuwsfq.jpg',
                 }
             ]
         },
@@ -330,7 +330,7 @@ const  setAllDb = async() => {
 
             photo : [
                 {
-                    path: 'c:',
+                    path: 'https://res.cloudinary.com/dfuozesaq/image/upload/v1675357467/HenryMusic/electronic3_roxdh8.jpg',
                 }
             ]
         },
@@ -339,7 +339,7 @@ const  setAllDb = async() => {
             artistId: 10,
             name: 'Rabbit Mechanic Concert',
             description: 'Te invitamos a sumergirte en un mundo de sonidos electrónicos, donde la música te llevará a un viaje sin fin de diversión y alegría. Rabbit Mechanic está lista para hacer que este momento sea inolvidable.',
-            startDate: '2023-03-10',
+            startDate: '2023-03-20',
             endDate: '2023-03-10',
             startTime: '19:00:00',
             stock: 1700,
@@ -352,7 +352,7 @@ const  setAllDb = async() => {
 
             photo : [
                 {
-                    path: 'c:',
+                    path: 'https://res.cloudinary.com/dfuozesaq/image/upload/v1675357471/HenryMusic/electronic1_jw5wod.jpg',
                 }
             ]
         },
@@ -376,7 +376,7 @@ const  setAllDb = async() => {
 
             photo : [
                 {
-                    path: 'c:',
+                    path: 'https://res.cloudinary.com/dfuozesaq/image/upload/v1675357467/HenryMusic/jazz1_eoncho.jpg',
                 }
             ]
         },
@@ -399,7 +399,7 @@ const  setAllDb = async() => {
 
             photo : [
                 {
-                    path: 'c:',
+                    path: 'https://res.cloudinary.com/dfuozesaq/image/upload/v1675357468/HenryMusic/jazz5_mhmzfr.jpg',
                 }
             ]
         },
@@ -408,7 +408,7 @@ const  setAllDb = async() => {
             artistId: 13,
             name: 'The Sound Makers Return',
             description: 'Si eres un apasionado de la música, no te pierdas esta oportunidad única de escuchar a los músicos más talentosos e innovadores del momento, donde la improvisación juega un papel fundamental en su arte.',
-            startDate: '2023-03-13',
+            startDate: '2023-03-18',
             endDate: '2023-03-13',
             startTime: '11:00:00',
             stock: 1500,
@@ -421,7 +421,7 @@ const  setAllDb = async() => {
 
             photo : [
                 {
-                    path: 'c:',
+                    path: 'https://res.cloudinary.com/dfuozesaq/image/upload/v1675357468/HenryMusic/jazz4_lgzane.jpg',
                 }
             ]
         },
@@ -443,7 +443,7 @@ const  setAllDb = async() => {
 
             photo : [
                 {
-                    path: 'c:',
+                    path: 'https://res.cloudinary.com/dfuozesaq/image/upload/v1675357468/HenryMusic/jazz3_tmp3cp.jpg',
                 }
             ]
         },
@@ -452,7 +452,7 @@ const  setAllDb = async() => {
             artistId: 15,
             name: 'Soulful Rhapsody Return',
             description: 'La música es una forma de comunicación sin barreras, y en este concierto, la orquesta Soulful Rhapsody te invita a unirte a ellos en una aventura musical llena de creatividad, libertad y, sobre todo, improvisación',
-            startDate: '2023-03-16',
+            startDate: '2023-03-26',
             endDate: '2023-03-16',
             startTime: '13:00:00',
             stock: 1700,
@@ -465,10 +465,341 @@ const  setAllDb = async() => {
 
             photo : [
                 {
-                    path: 'c:',
+                    path: 'https://res.cloudinary.com/dfuozesaq/image/upload/v1675357467/HenryMusic/jazz2_kg1hgm.jpg',
                 }
             ]
         },
+        {
+            locationId: 1,
+            artistId: 16,
+            name: 'Starlight Symphony Nigth',
+            description: 'No te pierdas la oportunidad de sumergirte en un universo musical que combina ritmos pegajosos con letras profundas y emotivas. ¡Te esperamos!',
+            startDate: '2023-03-16',
+            endDate: '2023-03-16',
+            startTime: '13:00:00',
+            stock: 600,
+            price: 3000,
+            categories : [
+                {
+                    id : 4
+                },
+            ],
+
+            photo : [
+                {
+                    path: 'https://res.cloudinary.com/dfuozesaq/image/upload/v1675357469/HenryMusic/pop3_kiqog4.jpg',
+                }
+            ]
+        },
+        {
+            locationId: 1,
+            artistId: 17,
+            name: 'Festival The Pop Sensations',
+            description: 'Este es el momento perfecto para disfrutar de una performance musical que te dejará sin aliento y con ganas de más.',
+            startDate: '2023-03-17',
+            endDate: '2023-03-07',
+            startTime: '21:00:00',
+            stock: 650,
+            price: 3000,
+            categories : [
+                {
+                    id : 4
+                },
+            ],
+
+            photo : [
+                {
+                    path: 'https://res.cloudinary.com/dfuozesaq/image/upload/v1675357469/HenryMusic/pop4_fkv2zb.jpg',
+                }
+            ]
+        },
+        {
+            locationId: 1,
+            artistId: 18,
+            name: 'Lo mejor de Electric Hearts',
+            description: 'Si eres amante de la música y estás buscando una velada llena de emoción, ¡no te pierdas este concierto!',
+            startDate: '2023-03-18',
+            endDate: '2023-03-18',
+            startTime: '20:00:00',
+            stock: 500,
+            price: 2000,
+            categories : [
+                {
+                    id : 4
+                },
+            ],
+
+            photo : [
+                {
+                    path: 'https://res.cloudinary.com/dfuozesaq/image/upload/v1675357468/HenryMusic/pop1_nph4yy.jpg',
+                }
+            ]
+        },
+        {
+            locationId: 1,
+            artistId: 19,
+            name: 'Future Rhythms en Vivo',
+            description: '¡Bienvenidos a este evento musical lleno de diversión y alegría! Una banda de música pop que hará vibrar el escenario con sus éxitos y ritmos contagiosos.',
+            startDate: '2023-03-19',
+            endDate: '2023-03-19',
+            startTime: '21:30:00',
+            stock: 600,
+            price: 2000,
+            categories : [
+                {
+                    id : 4
+                },
+            ],
+
+            photo : [
+                {
+                    path: 'https://res.cloudinary.com/dfuozesaq/image/upload/v1675357468/HenryMusic/pop2_eoqp55.jpg',
+                }
+            ]
+        },
+        {
+            locationId: 1,
+            artistId: 20,
+            name: 'Dream Pop Collective Return',
+            description: '¡La música pop llega a la ciudad! Dream Pop Collective es una banda de éxitos que promete hacer que te sientas vivo y te diviertas como nunca antes.',
+            startDate: '2023-03-20',
+            endDate: '2023-03-20',
+            startTime: '13:00:00',
+            stock: 650,
+            price: 2500,
+            categories : [
+                {
+                    id : 4
+                },
+            ],
+
+            photo : [
+                {
+                    path: 'https://res.cloudinary.com/dfuozesaq/image/upload/v1675357469/HenryMusic/pop5_cdjwqs.jpg',
+                }
+            ]
+        },
+        {
+            locationId: 1,
+            artistId: 21,
+            name: 'La pesada de Argento´s Riffs',
+            description: '¡¡Bienvenidos a este increíble evento musical! Este es el momento perfecto para escuchar algunas de las mejores canciones rockeras.',
+            startDate: '2023-03-20',
+            endDate: '2023-03-20',
+            startTime: '20:00:00',
+            stock: 650,
+            price: 2500,
+            categories : [
+                {
+                    id : 5
+                },
+            ],
+
+            photo : [
+                {
+                    path: 'https://res.cloudinary.com/dfuozesaq/image/upload/v1675357470/HenryMusic/rock5_ryj8ap.jpg',
+                }
+            ]
+        },
+        {
+            locationId: 1,
+            artistId: 22,
+            name: 'La Banda Rebelde Regresa',
+            description: '¡Bienvenidos al evento musical del año! Esta tarde tendremos el honor de escuchar a una de las bandas de rock más influyentes de todos los tiempos.',
+            startDate: '2023-03-21',
+            endDate: '2023-03-21',
+            startTime: '22:00:00',
+            stock: 650,
+            price: 2500,
+            categories : [
+                {
+                    id : 5
+                },
+            ],
+
+            photo : [
+                {
+                    path: 'https://res.cloudinary.com/dfuozesaq/image/upload/v1675357469/HenryMusic/rock2_n3f4zk.jpg',
+                }
+            ]
+        },
+        {
+            locationId: 1,
+            artistId: 23,
+            name: 'Gira de La Poderosa Social Club',
+            description: '¿Estás buscando una forma de liberar toda tu energía? ¡Entonces estás en el lugar correcto!',
+            startDate: '2023-03-22',
+            endDate: '2023-03-22',
+            startTime: '21:00:00',
+            stock: 650,
+            price: 2500,
+            categories : [
+                {
+                    id : 5
+                },
+            ],
+
+            photo : [
+                {
+                    path: 'https://res.cloudinary.com/dfuozesaq/image/upload/v1675357470/HenryMusic/rock3_j7ysr1.jpg',
+                }
+            ]
+        },
+        {
+            locationId: 1,
+            artistId: 24,
+            name: 'Rock del Sur',
+            description: '¡Preparen sus oídos para el sonido más poderoso de la ciudad! La banda de rock que todos conocemos y amamos estará aquí para deleitarnos con sus mejores canciones.',
+            startDate: '2023-03-23',
+            endDate: '2023-03-23',
+            startTime: '22:00:00',
+            stock: 650,
+            price: 2000,
+            categories : [
+                {
+                    id : 5
+                },
+            ],
+
+            photo : [
+                {
+                    path: 'https://res.cloudinary.com/dfuozesaq/image/upload/v1675357470/HenryMusic/rock5_ryj8ap.jpg',
+                }
+            ]
+        },
+        {
+            locationId: 1,
+            artistId: 25,
+            name: 'Corazones Salvajes - Gira costera',
+            description: '¿Eres fanático del rock y la música en vivo? ¡Entonces tienes que estar aquí hoy! Corazones Salvajes, la banda de rock más esperada de la temporad.',
+            startDate: '2023-03-15',
+            endDate: '2023-03-25',
+            startTime: '22:00:00',
+            stock: 750,
+            price: 1500,
+            categories : [
+                {
+                    id : 5
+                },
+            ],
+
+            photo : [
+                {
+                    path: 'https://res.cloudinary.com/dfuozesaq/image/upload/v1675357469/HenryMusic/rock1_xgtawl.jpg',
+                }
+            ]
+        },
+        {
+            locationId: 1,
+            artistId: 26,
+            name: 'Clásicos de La Orquesta de Juan Dominguez',
+            description: 'Bienvenidos a todos a este concierto de la Orquesta de Juan Dominguez, una orquesta de tango liderada por el talentoso Juan Dominguez',
+            startDate: '2023-03-25',
+            endDate: '2023-03-25',
+            startTime: '19:00:00',
+            stock: 750,
+            price: 1500,
+            categories : [
+                {
+                    id : 6
+                },
+            ],
+
+            photo : [
+                {
+                    path: 'https://res.cloudinary.com/dfuozesaq/image/upload/v1675357470/HenryMusic/tango1_eeqzqj.jpg',
+                }
+            ]
+        },
+        {
+            locationId: 1,
+            artistId: 27,
+            name: 'Cuarteto Porteño y su repertorio',
+            description: 'El "Cuarteto Porteñouna" invita a disfrutar de una noche de tango inolvidable. Con más de 20 años de experiencia, estos cuatro músicos han llevado su arte por todo el mundo, deleitando a su público con su virtuosismo y pasión.',
+            startDate: '2023-03-14',
+            endDate: '2023-03-26',
+            startTime: '22:00:00',
+            stock: 750,
+            price: 1500,
+            categories : [
+                {
+                    id : 6
+                },
+            ],
+
+            photo : [
+                {
+                    path: 'https://res.cloudinary.com/dfuozesaq/image/upload/v1675357470/HenryMusic/tango4_hcqzdr.jpg',
+                }
+            ]
+        },
+        {
+            locationId: 1,
+            artistId: 28,
+            name: 'Noche de Corazón Dos por Cuatro',
+            description: 'Bienvenidos a una noche de tango para bailar con el Cuarteto "Corazón Dos por Cuatro". Este cuarteto está formado por cuatro músicos talentosos: Angelino Ureña-Mascaró, Leandro Jerez García, Maxi Conesa y Pancho Coloma.',
+            startDate: '2023-03-27',
+            endDate: '2023-03-27',
+            startTime: '22:00:00',
+            stock: 550,
+            price: 2000,
+            categories : [
+                {
+                    id : 6
+                },
+            ],
+
+            photo : [
+                {
+                    path: 'https://res.cloudinary.com/dfuozesaq/image/upload/v1675357470/HenryMusic/tango3_aeunlw.jpg',
+                }
+            ]
+        },
+        {
+            locationId: 1,
+            artistId: 29,
+            name: 'El ritmo de Tangos del Barrio',
+            description: 'Bienvenidos a una noche de tango y amistad con el cuarteto "Tangos del barrio". Con la magia de las cuerdas y la pasión en sus voces.',
+            startDate: '2023-03-28',
+            endDate: '2023-03-28',
+            startTime: '19:00:00',
+            stock: 500,
+            price: 3000,
+            categories : [
+                {
+                    id : 6
+                },
+            ],
+
+            photo : [
+                {
+                    path: 'https://res.cloudinary.com/dfuozesaq/image/upload/v1675357470/HenryMusic/tango2_owi9bo.jpg',
+                }
+            ]
+        },
+        {
+            locationId: 1,
+            artistId: 30,
+            name: 'Sacando viruta con Vientos de Buenos Aires',
+            description: '¡Bienvenidos a una noche de tango inolvidable con el ensamble "Vientos de Buenos Aires"! Este grupo de músicos talentosos se unen para traernos la verdadera esencia del tango argentino.',
+            startDate: '2023-03-22',
+            endDate: '2023-03-20',
+            startTime: '22:00:00',
+            stock: 750,
+            price: 1500,
+            categories : [
+                {
+                    id : 6
+                },
+            ],
+
+            photo : [
+                {
+                    path: 'https://res.cloudinary.com/dfuozesaq/image/upload/v1675357470/HenryMusic/tango5_ncm2lw.jpg',
+                }
+            ]
+        },
+        
 
     ];
 
