@@ -1,7 +1,7 @@
 const { Product, Photo, Category, Artist, Location } = require('../db.js');
 const { Op } = require('sequelize');
 
-const getProductsFiltered = async(name, date, category) => {
+const getProductsFiltered = async(name, days, category) => {
     const productFields = ['id', 'name', 'Description', 'StartDate','EndDate', 'Stock','Price','StartTime'];
 
     const condition = {};
@@ -39,8 +39,17 @@ const getProductsFiltered = async(name, date, category) => {
     // filtro por campos de countries
     if (name) where.name = {[Op.iLike] : `%${name}%`};
 
-    const validateDate = /^\d{4}\-\d{2}\-\d{2}$/;
-    if (date && validateDate.test(date)) where.startDate = `${date}`;
+    // lo dejo por si despues se quiere filtrar por una fecha en particular
+    // const validateDate = /^\d{4}\-\d{2}\-\d{2}$/;
+    // if (day && validateDate.test(date)) where.startDate = `${date}`;
+    if (days && !isNaN(days)) {
+       const date = new Date();
+       date.setDate(date.getDate() + parseInt(days));
+       where.startDate = {[Op.lte] : `${date}`};
+    } 
+
+
+    
     condition.where = where; 
 
     // filtro por join - tabla relacionada

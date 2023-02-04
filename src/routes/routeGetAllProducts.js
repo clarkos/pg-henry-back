@@ -5,12 +5,12 @@ const { getProductsFiltered } = require('../controllers/controllerGetProductsFil
 const router = Router();
 
 router.get('/', async(req, res) => {
-    const {name, date, category} = req.query;
+    const {name, days, category} = req.query;
 
     try {
         let products= [];
-        if (name || date || category) {
-            products = await getProductsFiltered(name, date, category);
+        if (name || days || category) {
+            products = await getProductsFiltered(name, days, category);
         } else {
             products = await getAllProducts();
         }
