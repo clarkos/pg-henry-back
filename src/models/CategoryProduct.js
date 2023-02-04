@@ -10,12 +10,12 @@ module.exports = (sequelize) => {
         },
         categoryId: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            // allowNull: false,
             field: 'CategoryId'
         },
         productId: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            // allowNull: false,
             field: 'ProductId'
         }
     }, {
