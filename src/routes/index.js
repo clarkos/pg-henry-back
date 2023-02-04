@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const routeGetAllProducts = require('./routeGetAllProducts');
-const routeGetProductDetail = require('./routeGetProductDetail')
+const routeGetProductDetail = require('./routeGetProductDetail');
+const routeGetAllCategories = require('./routeGetAllCategories');
 const artistRouter = require('./admin/artist');
 const categoryRouter = require('./admin/category');
 const locationRouter = require('./admin/location');
@@ -10,6 +11,7 @@ const router = Router();
 
 router.use('/products', routeGetAllProducts);
 router.use('/products', routeGetProductDetail);
+router.use('/categories', routeGetAllCategories);
 
 // Admin routes
 router.use('/admin', artistRouter);
