@@ -47,9 +47,6 @@ const getProductsFiltered = async(name, days, category) => {
        date.setDate(date.getDate() + parseInt(days));
        where.startDate = {[Op.lte] : `${date}`};
     } 
-
-
-    
     condition.where = where; 
 
     // filtro por join - tabla relacionada
@@ -61,4 +58,3 @@ const getProductsFiltered = async(name, days, category) => {
 };
 
 module.exports = { getProductsFiltered };
-
