@@ -1,5 +1,6 @@
 const { DataTypes } = require("sequelize");
 const { StatusType } = require("../dataType");
+const { RoleType } = require("../dataType");
 
 module.exports = (sequelize) => {
   sequelize.define(
@@ -27,7 +28,7 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       role: {
-        type: DataTypes.STRING,
+        type: RoleType,
         allowNull: false,
         defaultValue: "User",
         field: "Role",
