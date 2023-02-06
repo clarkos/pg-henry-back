@@ -20,6 +20,7 @@ module.exports = (sequelize) => {
       //   password: {
       //     type: DataTypes.STRING,
       //     set(value) {
+      //
       //       this.setDataValue('password', hash(value));
       //     }
       //   },
