@@ -6,6 +6,7 @@ const artistRouter = require('./admin/artist');
 const categoryRouter = require('./admin/category');
 const locationRouter = require('./admin/location');
 const productRouter = require('./admin/product');
+const userRouter = require('./admin/user');
 
 const router = Router();
 
@@ -18,5 +19,6 @@ router.use('/admin', artistRouter);
 router.use('/admin', categoryRouter);
 router.use('/admin', locationRouter);
 router.use('/admin', productRouter);
+router.use('/admin', userRouter);
 
 module.exports = router;
