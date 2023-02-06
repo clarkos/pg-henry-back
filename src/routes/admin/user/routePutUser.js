@@ -1,7 +1,6 @@
 const { Router } = require('express');
 const { editUser } = require('../../../controllers/admin/user/controllerPutUser');
 
-
 const router = Router();
 
 // PUT /admin/users/{id}
