@@ -23,10 +23,10 @@ module.exports = (sequelize) => {
       //       this.setDataValue('password', hash(value));
       //     }
       //   },
-      password: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
+      // password: {
+      //   type: DataTypes.STRING,
+      //   allowNull: false,
+      // },
       role: {
         type: RoleType,
         allowNull: false,
