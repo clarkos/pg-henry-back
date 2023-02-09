@@ -19,8 +19,9 @@ const getUsers = async (page, size, sort, filter) => {
         const idsCondition = filterObj.id ? { [Op.in]: filterObj.id } : { [Op.gt]: 0 };
         const nameCondition = filterObj.userName ? { [Op.iLike]: `${JSON.parse(filter).userName}%` } : { [Op.iLike]: '%' };
         const statusCondition = filterObj.status ? { [Op.eq]: filterObj.status } : { [Op.in]: ['Active', 'Disabled'] };
+        const roleCondition = filterObj.role ? { [Op.eq]: filterObj.role } : { [Op.in]: ['User', 'Admin'] };
         // console.log('idsCondition, nameCondition, statusCondition: ', idsCondition, nameCondition, statusCondition);
-        options.where = { [Op.and]: [{ id: idsCondition }, { userName: nameCondition }, { status: statusCondition }] };
+        options.where = { [Op.and]: [{ id: idsCondition }, { userName: nameCondition }, { status: statusCondition }, {role: roleCondition}] };
     }
 
     console.log('options: ', options);
