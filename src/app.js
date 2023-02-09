@@ -28,8 +28,8 @@ server.use('/', routes);
 server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   const status = err.status || 500;
   const message = err.message || err;
-  console.error(err);
-  res.status(status).send(message);
+  console.error(err.errors);
+  res.status(status).send(err.errors ? err.errors : message);
 });
 
 module.exports = server;
