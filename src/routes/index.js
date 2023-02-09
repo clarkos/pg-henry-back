@@ -1,7 +1,7 @@
 const { Router } = require('express');
-const routeGetAllProducts = require('./routeGetAllProducts');
-const routeGetProductDetail = require('./routeGetProductDetail');
-const routeGetAllCategories = require('./routeGetAllCategories');
+const routeGetAllProducts = require('./client/routeGetAllProducts');
+const routeGetProductDetail = require('./client/routeGetProductDetail');
+const routeGetAllCategories = require('./client/routeGetAllCategories');
 const artistRouter = require('./admin/artist');
 const categoryRouter = require('./admin/category');
 const locationRouter = require('./admin/location');
