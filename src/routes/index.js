@@ -8,6 +8,7 @@ const locationRouter = require('./admin/location');
 const productRouter = require('./admin/product');
 const userRouter = require('./admin/user');
 const customerRouter = require('./admin/customer');
+const reviewRouter = require('./admin/review');
 
 const router = Router();
 
@@ -22,5 +23,6 @@ router.use('/admin', locationRouter);
 router.use('/admin', productRouter);
 router.use('/admin', userRouter);
 router.use('/admin', customerRouter);
+router.use('/admin', reviewRouter);
 
 module.exports = router;
