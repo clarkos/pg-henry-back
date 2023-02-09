@@ -1,4 +1,4 @@
-const { Product, Photo, Category, Artist, Location, CategoryProduct } = require('../db.js');
+const { Product, Photo, Category, Artist, Location, CategoryProduct } = require('../../db.js');
 const { Sequelize } = require('sequelize');
 
 const getAllProducts = async() => {
