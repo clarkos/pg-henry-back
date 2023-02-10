@@ -21,7 +21,6 @@ module.exports = (sequelize) => {
         },
         shippingDate: {
             type: DataTypes.DATEONLY,
-            allowNull: false,
             field: 'ShippingDate'
         },
         totalAmount: {
@@ -29,9 +28,9 @@ module.exports = (sequelize) => {
             field: 'TotalAmount'
         },
         status: {
-            type: DataTypes.ENUM('Pending', 'Canceled', 'Completed'), 
+            type: DataTypes.ENUM('Created', 'Processing', 'Canceled', 'Completed'), 
             allowNull: false,
-            defaultValue: 'Pending',
+            defaultValue: 'Created',
             field: 'Status'
         }
     }, {
