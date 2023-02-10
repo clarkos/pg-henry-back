@@ -9,12 +9,14 @@ const productRouter = require('./admin/product');
 const userRouter = require('./admin/user');
 const customerRouter = require('./admin/customer');
 const orderRouter = require('./admin/order');
+const routeCreateOrder = require('./client/routePostOrder');
 
 const router = Router();
 
 router.use('/products', routeGetAllProducts);
 router.use('/products', routeGetProductDetail);
 router.use('/categories', routeGetAllCategories);
+router.use('/order', routeCreateOrder);
 
 // Admin routes
 router.use('/admin', artistRouter);

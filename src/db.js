@@ -62,8 +62,8 @@ Order.hasMany(OrderItem);
 OrderItem.belongsTo(Order);
 
 // OrderItem --> Product
-OrderItem.hasMany(Product);
-Product.belongsTo(OrderItem);
+Product.hasMany(OrderItem);
+OrderItem.belongsTo(Product);
 
 // Payment --> Order
 Order.hasMany(Payment);
