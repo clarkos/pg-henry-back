@@ -11,10 +11,10 @@ module.exports = (sequelize) => {
         primaryKey: true,
         field: "Id",
       },
-      // userId: {
-      //   type: DataTypes.INTEGER,
-      //   field: "UserId",
-      // },
+      userId: {
+        type: DataTypes.INTEGER,
+        field: "UserId",
+      },
       name: {
         type: DataTypes.STRING,
         allowNull: false,
