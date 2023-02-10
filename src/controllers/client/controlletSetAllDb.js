@@ -1,4 +1,4 @@
-const { Artist, Category, Location, Product, Photo, CategoryProduct }  = require('../db.js');
+const { Artist, Category, Location, Product, Photo, CategoryProduct }  = require('../../db.js');
 
 const  setAllDb = async() => {
 

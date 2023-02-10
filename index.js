@@ -19,7 +19,7 @@
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
-const { setAllDb } = require('./src/controllers/controlletSetAllDb');
+const { setAllDb } = require('./src/controllers/client/controlletSetAllDb');
 
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {

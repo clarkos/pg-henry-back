@@ -1,8 +1,17 @@
 const path = require('path');
 const { Product, Photo } = require('../../../db');
 const { uploadPhotoToCloudinary } = require('./uploadPhotoToCloudinary');
+const httpStatusCodes = require('../../../utils/http-status-codes');
+const ValidationError = require('../../../utils/validation-error');
+const { validateProduct } = require('./validateProduct'); 
 
 const editProduct = async (product) => {
+    // Validate data
+    const errors = await validateProduct(product);
+    if (errors) {
+        throw new ValidationError('Validation error', errors, httpStatusCodes.BAD_REQUEST);
+    }
+
     // console.log('product to edit: ', product);
     let editedProduct = await Product.findByPk(product.id);
     const categories = await editedProduct.getCategories();
