@@ -27,40 +27,32 @@ module.exports = (sequelize) => {
       },
       city: {
         type: DataTypes.STRING,
-        allowNull: false,
         field: "City",
       },
       state: {
         type: DataTypes.STRING,
-        allowNull: false,
         field: "State",
       },
       zip: {
         type: DataTypes.STRING,
-        allowNull: false,
         field: "Zip",
       },
       email: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
         field: "Email",
       },
       telephone: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        unique: true,
+        type: DataTypes.STRING,
         field: "Telephone",
       },
       document: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        unique: true,
         field: "Document",
       },
       birthDate: {
         type: DataTypes.DATEONLY,
-        allowNull: false,
         field: 'BirthDate'
     },
       status: {

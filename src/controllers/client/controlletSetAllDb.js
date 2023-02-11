@@ -1,4 +1,5 @@
-const { Artist, Category, Location, Product, Photo, CategoryProduct }  = require('../../db.js');
+const { Artist, Category, Location, Product, Photo, CategoryProduct,
+User, Customer }  = require('../../db.js');
 
 const  setAllDb = async() => {
 
@@ -814,6 +815,69 @@ const  setAllDb = async() => {
             p = await Photo.create({productId: c.id, path: photo.path})
         }
     }    
+
+    const users = [
+        {
+            userName: "admin",
+            role: "Admin"
+        },
+        {
+            userName: "pedro",
+            role: "User"
+        },
+        {
+            userName: "maria",
+            role: "User"
+        },
+        {
+            userName: "lola",
+            role: "User"
+        },
+    ]
+
+    await User.bulkCreate(users);  
+
+    const customers = [
+        {
+            userId: 2,
+            name: "Pedro Miranda",
+            address: "Gallo 176 8A",
+            city: "CABA",
+            state: "CABA",
+            zip: "1782",
+            email: "pedro@gmail.com",
+            telephone: "1199881188",
+            document: 22222222,
+            birthDate: "1972-01-01"
+        },
+        {
+            userId: 3,
+            name: "Maria Lopez",
+            address: "Rivadavia 12324",
+            city: "CHACO",
+            state: "CHACO",
+            zip: "8971",
+            email: "maria@gmail.com",
+            telephone: "1199881188",
+            document: 1111111,
+            birthDate: "1990-06-15"
+        },
+        {
+            userId: 4,
+            name: "Loca Mora",
+            address: "San Martin 891",
+            city: "Mar del Plata",
+            state: "BUENOS AIRES",
+            zip: "9911",
+            email: "lola@ecem.com",
+            telephone: "11-9-8892-1111",
+            document: 1111111,
+            birthDate: "1986-03-05"
+        },
+    ];
+
+    await Customer.bulkCreate(customers);
+
 
 }
 
