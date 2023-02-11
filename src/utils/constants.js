@@ -6,6 +6,7 @@ const constants = {
     INVALID_DATA: 'Field has invalid data',
     INVALID_STOCK: 'Stock value must be equal or greater than 0',
     INVALID_PRICE: 'Price value must be greater than 0',
+    INVALID_ORDER_STATUS_CHANGE: 'The status is invalid',
     VALIDATION_ERRORS: 'Validation errors',
     INCORRECT_TYPE: 'Type is incorrect',
     INVALID_RANGE: 'Field has an invalid range',

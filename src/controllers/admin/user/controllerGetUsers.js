@@ -15,7 +15,7 @@ const getUsers = async (page, size, sort, filter) => {
     if (filter && Object.keys(JSON.parse(filter)).length > 0) {
         // console.log('JSON.parse(filter): ', JSON.parse(filter));
         const filterObj = JSON.parse(filter);
-        console.log("filterObj: ", filterObj)
+        // console.log("filterObj: ", filterObj)
         const idsCondition = filterObj.id ? { [Op.in]: filterObj.id } : { [Op.gt]: 0 };
         const nameCondition = filterObj.userName ? { [Op.iLike]: `${JSON.parse(filter).userName}%` } : { [Op.iLike]: '%' };
         const statusCondition = filterObj.status ? { [Op.eq]: filterObj.status } : { [Op.in]: ['Active', 'Disabled'] };
@@ -23,10 +23,10 @@ const getUsers = async (page, size, sort, filter) => {
         options.where = { [Op.and]: [{ id: idsCondition }, { userName: nameCondition }, { status: statusCondition }] };
     }
 
-    console.log('options: ', options);
+    // console.log('options: ', options);
     let users = await User.findAndCountAll(options);
 
-    console.log('users: ', users.rows);
+    // console.log('users: ', users.rows);
 
     const response = {
         count: users.count,

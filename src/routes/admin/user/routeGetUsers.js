@@ -7,11 +7,11 @@ const router = Router();
 router.get(
     '/',
     async (req, res, next) => {
-        console.log("routeGetUsers => entra")
+        // console.log("routeGetUsers => entra")
         try {
             const { page, size, sort, filter } = req.query;
 
-            console.log('filter query: ', filter);
+            // console.log('filter query: ', filter);
 
             const users = await getUsers(page, size, sort, filter);
 
