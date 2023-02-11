@@ -1,5 +1,5 @@
 const { Artist, Category, Location, Product, Photo, CategoryProduct,
-User, Customer }  = require('../../db.js');
+User, Customer, Order, OrderItem }  = require('../../db.js');
 
 const  setAllDb = async() => {
 
@@ -858,7 +858,7 @@ const  setAllDb = async() => {
             state: "CHACO",
             zip: "8971",
             email: "maria@gmail.com",
-            telephone: "1199881188",
+            telephone: "+54 11 6543-2211",
             document: 1111111,
             birthDate: "1990-06-15"
         },
@@ -878,6 +878,125 @@ const  setAllDb = async() => {
 
     await Customer.bulkCreate(customers);
 
+    const orders = [
+        {
+            customerId: 1,
+            orderDate: "2023-01-15",
+            totalAmount: 3000
+        },
+        {
+            customerId: 1,
+            orderDate: "2023-02-01",
+            totalAmount: 1500,
+            status: "Processing"
+        },
+        {
+            customerId: 2,
+            orderDate: "2022-12-23",
+            totalAmount: 4000,
+            status: "Completed"
+        },
+        {
+            customerId: 2,
+            orderDate: "2022-12-27",
+            totalAmount: 2500,
+            status: "Canceled"
+        },
+        {
+            customerId: 2,
+            orderDate: "2023-01-15",
+            totalAmount: 6000,
+            status: "Completed"
+        },
+        {
+            customerId: 3,
+            orderDate: "2023-02-02",
+            totalAmount: 1500,
+            status: "Completed"
+        },
+    ];
+
+    await Order.bulkCreate(orders);
+
+    const ordersItems = [
+        {
+            orderId: 1,
+            productId: 1,
+            quantity: 2,
+            unitPrice: 1500,
+            totalAmount: 3000
+        },
+
+        {
+            orderId: 2,
+            productId: 10,
+            quantity: 2,
+            unitPrice: 500,
+            totalAmount: 1000
+        },
+        {
+            orderId: 2,
+            productId: 5,
+            quantity: 1,
+            unitPrice: 250,
+            totalAmount: 250
+        },
+        {
+            orderId: 2,
+            productId: 15,
+            quantity: 1,
+            unitPrice: 250,
+            totalAmount: 250
+        },
+
+        {
+            orderId: 3,
+            productId: 17,
+            quantity: 2,
+            unitPrice: 1000,
+            totalAmount: 2000
+        },
+        {
+            orderId: 3,
+            productId: 20,
+            quantity: 1,
+            unitPrice: 2000,
+            totalAmount: 2000
+        },
+
+        {
+            orderId: 4,
+            productId: 20,
+            quantity: 1,
+            unitPrice: 1500,
+            totalAmount: 1500
+        },
+        {
+            orderId: 4,
+            productId: 1,
+            quantity: 1,
+            unitPrice: 1000,
+            totalAmount: 1000
+        },
+
+        {
+            orderId: 5,
+            productId: 15,
+            quantity: 6,
+            unitPrice: 1000,
+            totalAmount: 6000
+        },
+        
+        {
+            orderId: 6,
+            productId: 15,
+            quantity: 3,
+            unitPrice: 500,
+            totalAmount: 1500
+        },
+    ];
+
+    OrderItem.bulkCreate(ordersItems);
 
 }
 
