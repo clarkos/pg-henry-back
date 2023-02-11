@@ -997,7 +997,6 @@ const  setAllDb = async() => {
     ];
 
     OrderItem.bulkCreate(ordersItems);
-
 }
 
 module.exports = { setAllDb };
