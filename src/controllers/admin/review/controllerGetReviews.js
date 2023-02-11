@@ -42,7 +42,7 @@ const getReviews = async (page, size, sort, filter) => {
         }))
     }
 
-    return reviews;
+    return response;
 }
 
 module.exports = { getReviews };
