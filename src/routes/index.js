@@ -2,6 +2,7 @@ const { Router } = require('express');
 const routeGetAllProducts = require('./client/routeGetAllProducts');
 const routeGetProductDetail = require('./client/routeGetProductDetail');
 const routeGetAllCategories = require('./client/routeGetAllCategories');
+const routeGetDetailedUser = require('./client/routeGetDetailedUser');
 const artistRouter = require('./admin/artist');
 const categoryRouter = require('./admin/category');
 const locationRouter = require('./admin/location');
@@ -17,6 +18,7 @@ router.use('/products', routeGetAllProducts);
 router.use('/products', routeGetProductDetail);
 router.use('/categories', routeGetAllCategories);
 router.use('/order', routeCreateOrder);
+router.use('/user', routeGetDetailedUser);
 
 // Admin routes
 router.use('/admin', artistRouter);
