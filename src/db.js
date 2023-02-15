@@ -1,18 +1,36 @@
-require('dotenv').config();
 const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
+
+require('dotenv').config();
 const {
-  DB_USER, 
-  DB_PASSWORD, 
-  DB_HOST, 
-  DB_NAME
+  NODE_ENV,
+  DATABASE_URL
 } = process.env;
 
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`, {
-  logging: false, // set to console.log to see the raw SQL queries
-  native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-});
+let sequelize;
+
+if (NODE_ENV === 'PROD') {
+  sequelize = new Sequelize(DATABASE_URL, {
+    dialect: 'postgres',
+    dialectOptions: {
+      ssl: true // Enable SSL/TLS for secure communication with the database
+    },
+    pool: {
+      acquire: 30000, // Maximum time, in milliseconds, that the pool will try to get a connection before throwing an error
+      idle: 10000, // Maximum time, in milliseconds, that a connection can be idle before being released
+      min: 0, // Minimum number of connections in the pool
+      max: 10 // Maximum number of connections in the pool
+    },
+    logging: false // Disable SQL query logging for production environments
+  });
+} else {
+  sequelize = new Sequelize(DATABASE_URL, {
+    logging: false,
+    native: false,
+  });
+}
+
 const basename = path.basename(__filename);
 
 const modelDefiners = [];
@@ -33,13 +51,13 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Artist, Category, CategoryProduct, Location, Photo, Product, 
+const { Artist, Category, CategoryProduct, Location, Photo, Product,
   Customer, Order, OrderItem, Payment, User, Review } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product <---> Category
-Product.belongsToMany(Category, { through: CategoryProduct});
-Category.belongsToMany(Product, { through: CategoryProduct});
+Product.belongsToMany(Category, { through: CategoryProduct });
+Category.belongsToMany(Product, { through: CategoryProduct });
 
 // Product <---> Photo
 Product.hasMany(Photo);
