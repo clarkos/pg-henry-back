@@ -1,12 +1,14 @@
 const { Router } = require('express');
-const { addOrderItem } = require('../../controllers/client/controllerAddOrderItem');
+const { addEditOrderItem } = require('../../controllers/client/controllerAddEditOrderItem');
 
 const router = Router();
 
-router.post("/", async (req, res) => {
-    const {orderId, productId, quantity} = req.body;
+router.put("/:id/items", async (req, res) => {
+    const {id} = req.params;
+    const {productId, quantity} = req.body;
     try {
-        const order = await addOrderItem({orderId, productId, quantity});
+        const orderId = id;
+        const order = await addEditOrderItem({orderId, productId, quantity});
         if (!order || order.hasOwnProperty('error') ) 
             return res.status(404).json({error: order.error});             
         return res.status(200).json(order);

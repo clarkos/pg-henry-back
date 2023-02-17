@@ -1,9 +1,10 @@
 const { Product, Order, OrderItem, conn } = require('../../db.js');
 const { Sequelize, Transaction } = require('sequelize');
 
-const addOrderItem = async(data) => {
+const addEditOrderItem = async(data) => {
     const {orderId, productId, quantity} = data;
     
+
     return conn.transaction(async function (orderTransaction) {
 
         // obtengo encabezado de order
@@ -28,7 +29,7 @@ const addOrderItem = async(data) => {
         // actualizo stock
         await product.update(
             {
-                Stock: product.stock - quantity,
+                stock: product.stock - quantity,
             }, 
             {
                 transaction: orderTransaction
@@ -42,12 +43,18 @@ const addOrderItem = async(data) => {
         condition.where.productId = productId;
 
         let orderItem = await OrderItem.findOne(condition);
+        let newAditionalTotal = 0;
 
         if (orderItem) {
+            if ((orderItem.quantity + quantity) <= 0)  
+               throw new Error(`el item ${product.name} no puede tener cantidad menor que 0(cero).`);    
+
+            newAditionalTotal = quantity * orderItem.unitPrice;
             orderItem.update(
                 {
-                    Quantity: orderItem.quantity + quantity,
-                    TotalAmount: parseFloat(orderItem.totalAmount + (quantity * product.price)).toFixed(2) 
+                    quantity: orderItem.quantity + quantity,
+                    totalAmount:  (orderItem.quantity + quantity) * orderItem.unitPrice,
+                      // parseFloat(orderItem.totalAmount + (quantity * product.price)).toFixed(2) 
                 }, 
                 {
                     transaction: orderTransaction
@@ -55,25 +62,28 @@ const addOrderItem = async(data) => {
             ) 
 
         }else{
+            if (quantity <= 0)
+               throw new Error(`el item ${product.name} no puede tener cantidad menor que 0(cero).`);    
+
+            newAditionalTotal = quantity * product.price;
             orderItem = await OrderItem.create(
                 {
-                    OrderId: orderId,
-                    OroductId: productId,
-                    Quantity: quantity,
-                    UnitPrice: product.price,
-                    TotalAmount: parseFloat(quantity * product.price).toFixed(2),
+                    orderId: orderId,
+                    productId: productId,
+                    quantity: quantity,
+                    unitPrice: product.price,
+                    totalAmount: parseFloat(quantity * product.price).toFixed(2),
                 },            
                 {
                     transaction: orderTransaction
                 }
             );
         }
-
         
         // actualizo monto total de orden
         await order.update(
             {
-                TotalAmount: parseFloat(order.totalAmount) +parseFloat(orderItem.totalAmount)
+                totalAmount: parseFloat(order.totalAmount) + parseFloat(newAditionalTotal)
             }, 
             {
                 transaction: orderTransaction
@@ -99,5 +109,5 @@ const addOrderItem = async(data) => {
 };
 
 
-module.exports = { addOrderItem };
+module.exports = { addEditOrderItem };
 
