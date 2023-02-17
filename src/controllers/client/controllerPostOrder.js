@@ -40,7 +40,7 @@ const createOrder = async(data) => {
         order.dataValues.items = [];
         let product = {};   
         for (const item of items) {
-            product = await Product.findByPk(item.productId);
+            product = await Product.findByPk(item.productId, {lock: orderTransaction.LOCK.UPDATE});
             if (!product) 
                 throw new Error(`El producto ${item.id} no existe.`); 
 

@@ -11,14 +11,21 @@ const userRouter = require('./admin/user');
 const customerRouter = require('./admin/customer');
 const orderRouter = require('./admin/order');
 const reviewRouter = require('./admin/review');
+
 const routeCreateOrder = require('./client/routePostOrder');
+const routeGetFilteredOrder = require('./client/routeGetFilteredOrder');
+const routeAddOrderItem = require('./client/routeAddOrderItem');
 
 const router = Router();
 
 router.use('/products', routeGetAllProducts);
 router.use('/products', routeGetProductDetail);
 router.use('/categories', routeGetAllCategories);
+
 router.use('/order', routeCreateOrder);
+router.use('/order/items', routeAddOrderItem);
+router.use('/orders', routeGetFilteredOrder);
+
 router.use('/user', routeGetDetailedUser);
 
 // Admin routes

@@ -830,7 +830,7 @@ const  setAllDb = async() => {
             role: "User"
         },
         {
-            userName: "lola",
+            userName: "diegoleonardoformoso@gmail.com",
             role: "User"
         },
     ]
@@ -912,7 +912,7 @@ const  setAllDb = async() => {
             customerId: 3,
             orderDate: "2023-02-02",
             totalAmount: 1500,
-            status: "Completed"
+            status: "Created"
         },
     ];
 
