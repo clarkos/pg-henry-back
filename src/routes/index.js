@@ -15,6 +15,7 @@ const reviewRouter = require('./admin/review');
 const routeCreateOrder = require('./client/routePostOrder');
 const routeGetFilteredOrder = require('./client/routeGetFilteredOrder');
 const routeAddEditOrderItem = require('./client/routeAddEditOrderItem');
+const routeDeleteOrderItem = require('./client/routeDeleteOrderItem');
 
 const router = Router();
 
@@ -24,6 +25,7 @@ router.use('/categories', routeGetAllCategories);
 
 router.use('/order', routeCreateOrder);
 router.use('/order/', routeAddEditOrderItem);
+router.use('/order/', routeDeleteOrderItem);
 router.use('/orders', routeGetFilteredOrder);
 
 router.use('/user', routeGetDetailedUser);

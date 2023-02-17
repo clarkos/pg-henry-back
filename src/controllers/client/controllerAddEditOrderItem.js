@@ -10,7 +10,7 @@ const addEditOrderItem = async(data) => {
         // obtengo encabezado de order
         const order = await Order.findByPk(orderId,  {lock: orderTransaction.LOCK.UPDATE});
         if (!order)
-           throw new Error(`Orden no existe. Número de order ${orderId}`);
+           throw new Error(`Orden no existe. Número de orden ${orderId}`);
 
         if (order.status != 'Created')   
            throw new Error(`Imposible agregar nuevos items a la orden ${orderId}. Estado distinto a Created`);
