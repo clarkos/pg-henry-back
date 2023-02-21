@@ -12,6 +12,7 @@ const constants = {
     INVALID_RANGE: 'Field has an invalid range',
     MAX_LENGTH_EXCEEDED: 'The maximum length of the field has been exceeded',
     DUPLICATED_NAME: 'The name already exists',
+    EMAIL_NOTIFICATION_ERROR: 'Email notification error'
 }
 
 module.exports = constants;
