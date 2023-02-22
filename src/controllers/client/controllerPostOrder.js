@@ -1,4 +1,4 @@
-const { Customer, Product, Order, OrderItem, conn } = require('../../db.js');
+const { Customer, Product, Order, OrderItem, sequelize } = require('../../db.js');
 const { Sequelize, Transaction } = require('sequelize');
 
 const createOrder = async(data) => {
@@ -20,7 +20,7 @@ const createOrder = async(data) => {
     if (!totalAmount || totalAmount === 0)
        return {error: 'El importe total de la compra no puede ser igual a 0(cero).'};  
 
-    return conn.transaction(async function (orderTransaction) {
+    return sequelize.transaction(async function (orderTransaction) {
 
         // agrego encabezado de registro
         const order = await Order.create(

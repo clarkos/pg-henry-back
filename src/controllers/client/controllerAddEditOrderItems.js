@@ -1,11 +1,11 @@
-const { Product, Order, OrderItem, conn } = require('../../db.js');
+const { Product, Order, OrderItem, sequelize } = require('../../db.js');
 const { Sequelize, Transaction } = require('sequelize');
 
 const addEditOrderItems = async(data) => {
     const {orderId, items} = data;
     // items = [{productId, quantity}]
     
-    return conn.transaction(async function (orderTransaction) {
+    return sequelize.transaction(async function (orderTransaction) {
 
         // obtengo encabezado de order
         const order = await Order.findByPk(orderId,  {lock: orderTransaction.LOCK.UPDATE});
