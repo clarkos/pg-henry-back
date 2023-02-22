@@ -26,7 +26,7 @@ const getFilteredOrder = async (status, userName) => {
         },
         {
             model: Customer,
-            attributes: ['UserId'],
+            attributes: ['Id', 'UserId', 'Name', 'Address', 'City', 'State', 'Zip', 'Telephone', 'Document', 'BirthDate'],
             required: true, 
             include : [
                 {
