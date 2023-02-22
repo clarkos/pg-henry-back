@@ -1,5 +1,5 @@
 const constants = require('../../../utils/constants');
-const { Order } = require('../../../db');
+const { Order, MailGen } = require('../../../db');
 const httpStatusCodes = require('../../../utils/http-status-codes');
 const ValidationError = require('../../../utils/validation-error');
 const mailer = require('../../../mailerAdmin');
@@ -36,12 +36,13 @@ const editOrder = async (data) => {
 
     // Send event to customer
     try {
+        const mailGenConfig = await MailGen.findByPk(1);
         const to = data.Customer.email;
         const subject = `YAZZ - Orden de pedido N° ${data.id} actualizado`;
         const body = {
             name: data.Customer.name,  // Nombre del sitio
-            greeting: 'Hola',
-            signature: 'Saludos cordiales',
+            greeting: mailGenConfig.greeting,
+            signature: mailGenConfig.signature,
             intro: `Su pedido N° ${data.id} se ha actualizado al estado ${data.status}.`,
             outro: "Acceda con sus datos al sitio para ver el detalle de su pedido."
         }

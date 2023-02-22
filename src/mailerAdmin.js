@@ -1,5 +1,6 @@
 const nodemailer = require("nodemailer");
 const MailGen = require('mailgen');
+const { MailGen: MailGenConfig } = require('./db');
 require('dotenv').config();
 
 async function mailer(to, subject, body) {
@@ -17,26 +18,27 @@ async function mailer(to, subject, body) {
   const transporter = nodemailer.createTransport(mailConfig);
 
   // CREA LA INSTANCIA QUE PERMITE FORMATEAR EL CONTENIDO DEL MENSJAE
+  const mailGenConfig = await MailGenConfig.findByPk(1);
   let mailGen = new MailGen({
-    theme: "default",
+    theme: mailGenConfig.theme,
     product: {
-      name: "YAZZ",
-      link: 'https://pg-front-henry.vercel.app/',
-      copyright: 'Copyright © 2023 YAZZ. Todos los derechos reservados.',
+      name: mailGenConfig.productName,
+      link: mailGenConfig.productLink,
+      copyright: mailGenConfig.productCopyright,
     }
-  })
+  });
 
   // GENERACION DE LA ESTRUCTURA DEL EMAIL
   let emailHTML = mailGen.generate({ body });
 
   // FUNCION QUE ENVIA EL MENSAJE, RECIBE LA PLANTILLA CON TODOS LOS DATOS PARA EL USUARIO
-  await transporter.sendMail({
+  const sentMessageInfo = await transporter.sendMail({
     from: process.env.EMAIL_USER,
     to,
     subject,
     html: emailHTML,
   });
-  console.log(`(^-^) Email sent to ${to}`);
+  // console.log(`(^-^) Email sent to ${to}`, sentMessageInfo);
 }
 
 module.exports = mailer;
