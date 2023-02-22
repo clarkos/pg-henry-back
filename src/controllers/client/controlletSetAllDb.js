@@ -826,8 +826,8 @@ const  setAllDb = async() => {
             role: "User"
         },
         {
-            userName: "maria",
-            role: "User"
+            userName: "juanignaciomascarenhas@gmail.com",
+            role: "Admin"
         },
         {
             userName: "diegoleonardoformoso@gmail.com",
