@@ -19,6 +19,9 @@ const routeAddEditOrderItems = require('./client/routeAddEditOrderItems');
 const routeDeleteOrderItem = require('./client/routeDeleteOrderItem');
 const routeMailer = require('./client/routeSendMail')
 
+const miCuentaUserRouter = require('./client/user')
+const miCuentaCustomerRouter = require('./client/customer')
+
 const router = Router();
 
 router.use('/products', routeGetAllProducts);
@@ -43,5 +46,9 @@ router.use('/admin', customerRouter);
 router.use('/admin', orderRouter);
 router.use('/admin', reviewRouter);
 router.use('/admin', mailGenRouter);
+
+// Mi Cuenta routes
+router.use('/micuenta', miCuentaUserRouter);
+router.use('/micuenta', miCuentaCustomerRouter);
 
 module.exports = router;
