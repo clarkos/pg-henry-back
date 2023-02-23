@@ -41,15 +41,15 @@ router.use('/user', routePostUser);
 router.use('/mailer', routeMailer);
 
 // Admin routes
-router.use('/admin', artistRouter);
-router.use('/admin', categoryRouter);
-router.use('/admin', locationRouter);
-router.use('/admin', productRouter);
-router.use('/admin', /*adminMiddleware.decodeToken,*/ userRouter);
-router.use('/admin', customerRouter);
-router.use('/admin', orderRouter);
-router.use('/admin', reviewRouter);
-router.use('/admin', mailGenRouter);
+router.use('/admin', adminMiddleware.decodeToken, artistRouter);
+router.use('/admin', adminMiddleware.decodeToken, categoryRouter);
+router.use('/admin', adminMiddleware.decodeToken, locationRouter);
+router.use('/admin', adminMiddleware.decodeToken, productRouter);
+router.use('/admin', adminMiddleware.decodeToken, userRouter);
+router.use('/admin', adminMiddleware.decodeToken, customerRouter);
+router.use('/admin', adminMiddleware.decodeToken, orderRouter);
+router.use('/admin', adminMiddleware.decodeToken, reviewRouter);
+router.use('/admin', adminMiddleware.decodeToken, mailGenRouter);
 
 // Mi Cuenta routes
 router.use('/micuenta', miCuentaUserRouter);
