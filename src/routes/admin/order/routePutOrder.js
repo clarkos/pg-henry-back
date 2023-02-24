@@ -10,7 +10,7 @@ router.put(
         try {
             // const { id } = req.params;
             // const { name, address, coordinates, status } = req.body;
-
+            console.log(req.body);
             const order = await editOrder(req.body);
 
             res.status(200).json(order);
