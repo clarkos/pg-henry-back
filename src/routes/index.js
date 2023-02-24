@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const routeGetAllProducts = require('./client/routeGetAllProducts');
+const routeGetRecommendedProducts = require('./client/routeGetRecommendedProducts');
 const routeGetProductDetail = require('./client/routeGetProductDetail');
 const routeGetAllCategories = require('./client/routeGetAllCategories');
 const routeGetDetailedUser = require('./client/routeGetDetailedUser');
@@ -32,6 +33,7 @@ const router = Router();
 
 router.use('/products', routeGetAllProducts);
 router.use('/products', routeGetProductDetail);
+router.use('/recommended-products', routeGetRecommendedProducts);
 router.use('/categories', routeGetAllCategories);
 
 router.use('/order', routeCreateOrder);

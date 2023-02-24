@@ -836,6 +836,10 @@ const  setAllDb = async() => {
         {
             userName: "federico.rissone@gmail.com",
             role: "Admin"
+        },
+        {
+            userName: "frissone@villaconstitucion.gov.ar",
+            role: "Admin"
         }
     ]
 
