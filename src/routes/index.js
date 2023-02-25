@@ -40,6 +40,7 @@ router.use('/order/', routeAddEditOrderItems);
 router.use('/order/', routeDeleteOrderItem);
 router.use('/orders', routeGetFilteredOrder);
 router.use('/', orderRouter);
+router.use('/', customerRouter);
 
 // incorporo para la compra de MP, hacer require
 router.use("/pay", routePayment);
