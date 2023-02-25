@@ -1,6 +1,6 @@
 const { Product, Photo, Category, Artist, Location } = require('../../db.js');
 const { Op } = require('sequelize');
-const isProductFinished = require('./isProductFinished');
+const isShowFinished = require('./isShowFinished');
 
 const getProductsFiltered = async (name, days, category) => {
     const productFields = ['id', 'name', 'Description', 'StartDate', 'EndDate', 'Stock', 'Price', 'StartTime'];
@@ -58,7 +58,7 @@ const getProductsFiltered = async (name, days, category) => {
     const products = await Product.findAll(condition);
 
     products.forEach(product => {
-        product.dataValues.isProductFinished = isProductFinished(product.dataValues.StartDate, product.dataValues.StartTime)
+        product.dataValues.isShowFinished = isShowFinished(product.dataValues.StartDate, product.dataValues.StartTime)
     });
 
     return products;

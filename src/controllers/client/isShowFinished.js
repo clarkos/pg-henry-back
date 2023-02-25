@@ -1,6 +1,6 @@
 const { DateTime } = require('luxon');
 
-function isProductFinished(startDate, startTime) {
+function isShowFinished(startDate, startTime) {
     const dt = DateTime.now();
     const now = dt.setZone("America/Argentina/Buenos_Aires");
 
@@ -10,4 +10,4 @@ function isProductFinished(startDate, startTime) {
     return now > endEventDate;
 }
 
-module.exports = isProductFinished;
+module.exports = isShowFinished;
