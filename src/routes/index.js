@@ -24,6 +24,7 @@ const routeMailer = require('./client/routeSendMail')
 
 const miCuentaUserRouter = require('./client/user')
 const miCuentaCustomerRouter = require('./client/customer')
+const miCuentaReviewRouter = require('./client/review')
 
 const adminMiddleware = require('../middleware/adminMiddleware');
 const routePayment = require('./client/routePayment');
@@ -63,5 +64,6 @@ router.use('/admin', adminMiddleware.decodeToken, mailGenRouter);
 // Mi Cuenta routes
 router.use('/micuenta', miCuentaUserRouter);
 router.use('/micuenta', miCuentaCustomerRouter);
+router.use('/micuenta', miCuentaReviewRouter);
 
 module.exports = router;
