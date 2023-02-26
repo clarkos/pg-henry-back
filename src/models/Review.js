@@ -35,7 +35,7 @@ module.exports = (sequelize) => {
             field: 'Status'
         }
     }, {
-        timestamps: false,
+        timestamps: true,
         freezeTableName: true
     });
 };

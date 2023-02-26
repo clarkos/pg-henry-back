@@ -1,5 +1,5 @@
 const { Artist, Category, Location, Product, Photo, CategoryProduct,
-User, Customer, Order, OrderItem, MailGen }  = require('../../db.js');
+User, Customer, Order, OrderItem, MailGen, Review }  = require('../../db.js');
 
 const  setAllDb = async() => {
 
@@ -140,8 +140,8 @@ const  setAllDb = async() => {
             artistId: 1,
             name: 'Symphony Serenade Return',
             description: 'Bienvenidos al concierto de música clásica del trío Symphony Serenade. Esta noche, tendremos la oportunidad de escuchar algunos de los compositores más famosos de todos los tiempos, como Beethoven, Mozart y Tchaikovsky',
-            startDate: '2023-03-02',
-            endDate: '2023-03-02',
+            startDate: '2023-02-20',
+            endDate: '2023-02-20',
             startTime: '12:00:00',
             stock: 500,
             price: 1500,
@@ -162,8 +162,8 @@ const  setAllDb = async() => {
             artistId: 2,
             name: 'The Music Virtuosos Show',
             description: 'The Music Virtuosos te invita a una noche de música clásica de alto nivel. Con nuestros solistas de renombre y nuestro director, te llevaremos en un viaje a través de la historia de la música, desde la época barroca hasta la época clásica.',
-            startDate: '2023-03-03',
-            endDate: '2023-03-03',
+            startDate: '2023-02-25',
+            endDate: '2023-02-25',
             startTime: '22:00:00',
             stock: 550,
             price: 1600,
@@ -818,20 +818,16 @@ const  setAllDb = async() => {
 
     const users = [
         {
-            userName: "admin",
+            userName: "goya0310@gmail.com",
             role: "Admin"
         },
         {
-            userName: "pedro",
-            role: "User"
-        },
-        {
-            userName: "juanignaciomascarenhas@gmail.com",
+            userName: "nicolasbonder@gmail.com",
             role: "Admin"
         },
         {
-            userName: "diegoleonardoformoso@gmail.com",
-            role: "User"
+            userName: "diegollaya@gmail.com",
+            role: "Admin"
         },
         {
             userName: "federico.rissone@gmail.com",
@@ -839,6 +835,34 @@ const  setAllDb = async() => {
         },
         {
             userName: "frissone@villaconstitucion.gov.ar",
+            role: "User"
+        },
+        {
+            userName: "juanignaciomascarenhas@gmail.com",
+            role: "Admin"
+        },
+        {
+            userName: "angelzabaleta08@gmail.com",
+            role: "Admin"
+        },
+        {
+            userName: "angelzabaleta08@hotmail.com",
+            role: "Admin"
+        },
+        {
+            userName: "franprueba@gmail.com",
+            role: "Admin"
+        },
+        {
+            userName: "bercinigena@gmail.com",
+            role: "User"
+        },
+        {
+            userName: "diegoleonardoformoso@gmail.com",
+            role: "Admin"
+        },
+        {
+            userName: "silvestro.franco19@gmail",
             role: "Admin"
         }
     ]
@@ -847,41 +871,149 @@ const  setAllDb = async() => {
 
     const customers = [
         {
-            userId: 2,
+            userId: 1,
             name: "Pedro Miranda",
             address: "Gallo 176 8A",
             city: "CABA",
             state: "CABA",
             zip: "1782",
-            email: "pedro@gmail.com",
+            email: "goya0310@gmail.com",
             telephone: "1199881188",
             document: 22222222,
             birthDate: "1972-01-01"
         },
         {
-            userId: 3,
-            name: "Maria Lopez",
+            userId: 2,
+            name: "Nicolas Bonder",
             address: "Rivadavia 12324",
             city: "CHACO",
             state: "CHACO",
             zip: "8971",
-            email: "maria@gmail.com",
+            email: "nicolasbonder@gmail.com",
             telephone: "+54 11 6543-2211",
             document: 1111111,
             birthDate: "1990-06-15"
         },
         {
-            userId: 4,
-            name: "Loca Mora",
+            userId: 3,
+            name: "Diego Llaya",
             address: "San Martin 891",
             city: "Mar del Plata",
             state: "BUENOS AIRES",
             zip: "9911",
-            email: "lola@ecem.com",
+            email: "diegollaya@gmail.com",
             telephone: "11-9-8892-1111",
-            document: 1111111,
+            document: 1111112,
             birthDate: "1986-03-05"
         },
+        {
+            userId: 4,
+            name: "Federico Rissone",
+            address: "14 de Febrero 3245",
+            city: "Mar del Plata",
+            state: "BUENOS AIRES",
+            zip: "9911",
+            email: "federico.rissone@gmail.com",
+            telephone: "11-9-8892-1111",
+            document: 1111113,
+            birthDate: "1999-06-05"
+        },
+        {
+            userId: 5,
+            name: "Bruno Sontag",
+            address: "Ridavadia 3985",
+            city: "Mar del Plata",
+            state: "BUENOS AIRES",
+            zip: "9911",
+            email: "frissone@villaconstitucion.gov.ar",
+            telephone: "11-9-8892-1111",
+            document: 1111114,
+            birthDate: "1999-06-23"
+        },
+        {
+            userId: 6,
+            name: "Juan Ignacio Mascarenhas",
+            address: "Jazmin 2323",
+            city: "Mar del Plata",
+            state: "BUENOS AIRES",
+            zip: "9911",
+            email: "juanignaciomascarenhas@gmail.com",
+            telephone: "11-9-8892-1111",
+            document: 1111115,
+            birthDate: "1993-02-15"
+        },
+        {
+            userId: 7,
+            name: "Angel Zabaleta",
+            address: "Soler 4545",
+            city: "Mar del Plata",
+            state: "BUENOS AIRES",
+            zip: "9911",
+            email: "angelzabaleta08@gmail.com",
+            telephone: "11-9-8892-1111",
+            document: 1111116,
+            birthDate: "1963-01-17"
+        },
+        {
+            userId: 8,
+            name: "Ezequiel Fernandez",
+            address: "Belgrano 3434",
+            city: "Mar del Plata",
+            state: "BUENOS AIRES",
+            zip: "9911",
+            email: "angelzabaleta08@hotmail.com",
+            telephone: "11-9-8892-1111",
+            document: 1111117,
+            birthDate: "1953-11-17"
+        },
+        {
+            userId: 9,
+            name: "Lucas Fernandez",
+            address: "Pasteur 9898",
+            city: "Mar del Plata",
+            state: "BUENOS AIRES",
+            zip: "9911",
+            email: "franprueba@gmail.com",
+            telephone: "11-9-8892-1111",
+            document: 1111118,
+            birthDate: "1978-12-04"
+        },
+        {
+            userId: 10,
+            name: "Genaro Bercini",
+            address: "Domingo 1249",
+            city: "Mar del Plata",
+            state: "BUENOS AIRES",
+            zip: "9911",
+            email: "bercinigena@gmail.com",
+            telephone: "11-9-8892-1111",
+            document: 1111119,
+            birthDate: "1997-11-24"
+        },
+        {
+            userId: 11,
+            name: "Diego Formoso",
+            address: "Peron 5454",
+            city: "Mar del Plata",
+            state: "BUENOS AIRES",
+            zip: "9911",
+            email: "diegoleonardoformoso@gmail.com",
+            telephone: "11-9-8892-1111",
+            document: 2111111,
+            birthDate: "1957-12-24"
+        },
+        {
+            userId: 12,
+            name: "Franco Silvestro",
+            address: "Garmendia 8585",
+            city: "Mar del Plata",
+            state: "BUENOS AIRES",
+            zip: "9911",
+            email: "silvestro.franco19@gmail",
+            telephone: "11-9-8892-1111",
+            document: 2111112,
+            birthDate: "1977-04-24"
+        }
     ];
 
     await Customer.bulkCreate(customers);
@@ -890,13 +1022,14 @@ const  setAllDb = async() => {
         {
             customerId: 1,
             orderDate: "2023-01-15",
-            totalAmount: 3000
+            totalAmount: 3000,
+            status: "Completed"
         },
         {
             customerId: 1,
             orderDate: "2023-02-01",
             totalAmount: 1500,
-            status: "Processing"
+            status: "Canceled"
         },
         {
             customerId: 2,
@@ -920,7 +1053,7 @@ const  setAllDb = async() => {
             customerId: 3,
             orderDate: "2023-02-02",
             totalAmount: 1500,
-            status: "Created"
+            status: "Canceled"
         },
     ];
 
@@ -1006,13 +1139,107 @@ const  setAllDb = async() => {
 
     OrderItem.bulkCreate(ordersItems);
 
+    const reviews = [
+        {
+            productId: 1,
+            userId: 1,
+            message: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+            stars: 3,
+            status: "Active",
+        },
+        {
+            productId: 1,
+            userId: 5,
+            message: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+            stars: 2,
+            status: "Active",
+            createdAt: "2023-02-20 18:30:52.418-03",
+            updatedAt: "2023-02-20 18:30:52.418-03",
+        },
+        {
+            productId: 1,
+            userId: 3,
+            message: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+            stars: 5,
+            status: "Active",
+            createdAt: "2023-02-22 23:30:52.418-03",
+            updatedAt: "2023-02-22 23:30:52.418-03",
+        },
+        {
+            productId: 1,
+            userId: 8,
+            message: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+            stars: 1,
+            status: "Active",
+        },
+        {
+            productId: 1,
+            userId: 10,
+            message: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+            stars: 4,
+            status: "Active",
+        },
+        {
+            productId: 1,
+            userId: 6,
+            message: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+            stars: 5,
+            status: "Active",
+        },
+        {
+            productId: 2,
+            userId: 1,
+            message: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+            stars: 4,
+            status: "Active",
+        },
+        {
+            productId: 2,
+            userId: 5,
+            message: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+            stars: 5,
+            status: "Active",
+        },
+        {
+            productId: 2,
+            userId: 3,
+            message: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+            stars: 5,
+            status: "Active",
+        },
+        {
+            productId: 2,
+            userId: 8,
+            message: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+            stars: 4,
+            status: "Active",
+        },
+        {
+            productId: 2,
+            userId: 10,
+            message: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+            stars: 4,
+            status: "Active",
+        },
+        {
+            productId: 2,
+            userId: 6,
+            message: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+            stars: 5,
+            status: "Active",
+        },
+
+    ]
+
+    await Review.bulkCreate(reviews);
+
     MailGen.create({
         productName: 'YAZZ',
         productLink: 'https://pg-front-henry.vercel.app',
         productCopyright: 'Copyright © 2023 YAZZ. Todos los derechos reservados.',
         greeting: 'Hola',
         signature: 'Saludos cordiales'
-    })
+    });
 
 }
 
