@@ -3,9 +3,8 @@ const { Op } = require('sequelize');
 const { DateTime } = require('luxon');
 const isShowFinished = require('./isShowFinished');
 
-const getProducts = async (name, days, category) => {
-    const productFields = ['id', 'name', 'Description', 'StartDate', 'Stock', 'Price', 'StartTime'];
-
+const getFinishedProducts = async (name, category) => {
+    const productFields = ['id', 'name', 'Description', 'StartDate', 'StartTime', 'Stock'];
 
     const attributes = productFields;
 
@@ -43,33 +42,20 @@ const getProducts = async (name, days, category) => {
     // product name
     if (name) where.name = { [Op.iLike]: `%${name}%` };
 
-    // days
-    console.log('days', days);
-    const dt = DateTime.now();
-    const startDate = dt.setZone("America/Argentina/Buenos_Aires").toISODate();
-
-    if (days && days === 'today') {
-        console.log('startDate: ', startDate);
-        where.startDate = { [Op.eq]: startDate }
-    }
-
-    if (days && !isNaN(days)) {
-        let endDate = dt.setZone("America/Argentina/Buenos_Aires");
-        endDate = endDate.plus({ days }).toISODate();
-        console.log('range: ', startDate, endDate);
-        where.startDate = { [Op.gte]: startDate, [Op.lt]: endDate }
-    }
-
     const options = {
         attributes,
         include,
         where,
+        order: [
+            ['startDate', 'DESC'],
+            ['startTime', 'DESC']
+        ]
     };
 
     let products = await Product.findAll(options);
 
     products = products.filter(product =>
-        !isShowFinished(
+        isShowFinished(
             product.dataValues.StartDate,
             product.dataValues.StartTime
         )
@@ -78,4 +64,4 @@ const getProducts = async (name, days, category) => {
     return products;
 };
 
-module.exports = { getProducts };
+module.exports = { getFinishedProducts };
