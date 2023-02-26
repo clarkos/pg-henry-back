@@ -38,12 +38,8 @@ const getReviews = async (productId, page, size, userName) => {
     
     const reviews = await Review.findAll(options);
 
-    if (page || size)
-
-    console.log('avg rating', calculateAverageRating(reviews.map(r => r.dataValues.stars)));
-
     return {
-        averageRating: calculateAverageRating(reviews.map(r => r.dataValues.stars)),
+        averageRating: userName ? 0 : await calculateAverageRating(productId),
         items: reviews};
 };
 
