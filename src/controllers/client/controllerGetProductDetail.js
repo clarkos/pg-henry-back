@@ -9,7 +9,6 @@ const getProductDetail = async(id) => {
                 'name',
                 'Description', 
                 'StartDate',
-                'EndDate',
                 'Stock',
                 'Price',
                 'StartTime',
