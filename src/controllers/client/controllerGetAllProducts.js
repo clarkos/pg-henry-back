@@ -11,7 +11,6 @@ const getAllProducts = async () => {
         'name',
         'Description',
         'StartDate',
-        'EndDate',
         'Stock',
         'Price',
         'StartTime',

@@ -3,7 +3,7 @@ const { Op } = require('sequelize');
 const isShowFinished = require('./isShowFinished');
 
 const getProductsFiltered = async (name, days, category) => {
-    const productFields = ['id', 'name', 'Description', 'StartDate', 'EndDate', 'Stock', 'Price', 'StartTime'];
+    const productFields = ['id', 'name', 'Description', 'StartDate', 'Stock', 'Price', 'StartTime'];
 
     const condition = {};
     const where = {};
