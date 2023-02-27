@@ -29,18 +29,18 @@ const deleteOrderItem = async(data) => {
            // elimino el item de la orden
            await orderItem.destroy({force: true, transaction: orderTransaction});
 
-           // sumo stock de compra
-           const product = await Product.findByPk(productId, {lock: orderTransaction.LOCK.UPDATE});
+        //    // sumo stock de compra
+        //    const product = await Product.findByPk(productId, {lock: orderTransaction.LOCK.UPDATE});
 
-           // actualizo stock
-           await product.update(
-              {
-                stock: product.stock + oldQuantity,
-              }, 
-              {
-                transaction: orderTransaction
-              }
-           );
+        //    // actualizo stock
+        //    await product.update(
+        //       {
+        //         stock: product.stock + oldQuantity,
+        //       }, 
+        //       {
+        //         transaction: orderTransaction
+        //       }
+        //    );
 
            // agrego item al detalle de la compra
            // actualizo monto total de orden

@@ -30,15 +30,15 @@ const addEditOrderItems = async(data) => {
             if ( item.quantity > product.stock) 
                 throw new Error(`El producto ${product.name} no tiene stock disponible.`);             
 
-                // actualizo stock
-            await product.update(
-                {
-                    stock: product.stock - item.quantity,
-                }, 
-                {
-                    transaction: orderTransaction
-                }
-            );
+            //     // actualizo stock
+            // await product.update(
+            //     {
+            //         stock: product.stock - item.quantity,
+            //     }, 
+            //     {
+            //         transaction: orderTransaction
+            //     }
+            // );
 
             // agrego item al detalle de la compra
             const condition = {};
