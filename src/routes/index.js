@@ -32,6 +32,8 @@ const postCustomer = require("./admin/customer/routePostCustomer");
 const adminMiddleware = require('../middleware/adminMiddleware');
 const routePayment = require('./client/routePayment');
 
+const routePostReview = require('./client/routePostReview');
+
 const router = Router();
 
 router.use('/products', routeGetProducts);
@@ -57,6 +59,9 @@ router.use('/customer', routePostCustomer)
 router.use('/mailer', routeMailer);
 
 router.use('/customer', postCustomer);
+
+// Reviews
+router.use('/reviews', routePostReview);
 
 // Admin routes
 router.use('/admin', adminMiddleware.decodeToken, artistRouter);

@@ -5,7 +5,7 @@ async function canReviewProduct(productId, customerId) {
     const options = {
         where: {
             [Op.and]: [
-                { status: { [Op.eq]: 'Active' } },
+                { status: { [Op.eq]: 'Completed' } },
                 { CustomerId: { [Op.eq]: customerId } }
             ]
         },
@@ -14,7 +14,7 @@ async function canReviewProduct(productId, customerId) {
                 model: OrderItem,
                 where: {
                     [Op.and]: [
-                        { status: { [Op.eq]: 'Active' } },
+                        // { status: { [Op.eq]: 'Active' } },
                         { ProductId: { [Op.eq]: productId } }
                     ]
                 }
@@ -23,8 +23,6 @@ async function canReviewProduct(productId, customerId) {
     }
 
     const orders = await Order.findOne(options);
-
-    console.log('canReviewProduct, orders: ', orders);
 
     return true;
 }
