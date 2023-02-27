@@ -4,7 +4,7 @@ const { Op } = require('sequelize');
 
 const getRecommendedProducts = async (filter) => {
 
-    const productFields = ['id', 'name', 'Description', 'StartDate', 'EndDate', 'Stock', 'Price', 'StartTime'];
+    const productFields = ['id', 'name', 'Description', 'StartDate', 'Stock', 'Price', 'StartTime'];
 
     const options = {};
 

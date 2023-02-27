@@ -4,7 +4,7 @@ const { getRecommendedProducts } = require('../../controllers/client/controllerG
 const router = Router();
 
 router.get('/', async (req, res) => {
-    console.log('En /recommended');
+    // console.log('En /recommended');
     const { filter } = req.query;
 
     try {

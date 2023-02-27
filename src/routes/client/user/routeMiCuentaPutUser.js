@@ -1,5 +1,6 @@
 const { Router } = require('express');
-const { editUser } = require('../../../controllers/admin/user/controllerPutUser');
+const { editCustomer } = require('../../../controllers/admin/customer/controllerPutCustomer');
+const { PutUserAndCustomerDetails } = require('../../../controllers/client/user/controllerMiCuentaPutUserAndCustomerDetails');
 
 const router = Router();
 
@@ -9,12 +10,12 @@ router.put(
     async (req, res, next) => {
         try {
             const { id } = req.params;
-            const { userName, role, password, status } = req.body;
-            // console.log('put /user/:id req.body: ', req.body);
+            const { name, address, city, state, zip, email, telephone, document, birthDate, status} = req.body;
+            console.log('put /user/:id req.body: ', req.body);
 
-            const user = await editUser(id, userName,password, role, status);
+            const customer = await PutUserAndCustomerDetails(id, name, address, city, state, zip, email, telephone, document, birthDate, status);
 
-            res.status(200).json(user);
+            res.status(200).json(customer);
         } catch (error) {
             // console.log('PUT /user/{id} error: ', error);
             next(error);
