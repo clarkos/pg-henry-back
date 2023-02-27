@@ -94,7 +94,6 @@ const getPaymentInfo = async (req, res, next) => {
       order
         .save()
         .then((_) => {
-          const isTest = process.env.NODE_ENV === "TEST";
           return res.redirect(frontRedirectUrl);
         })
         .catch((err) => {
