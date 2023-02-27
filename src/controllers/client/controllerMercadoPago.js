@@ -54,9 +54,9 @@ const payment = async (req, res, next) => {
       },
       back_urls: {
         //rutas de acuerdo a como haya salido la transacion
-        success: backRedirectUrl + "/pay/",
-        failure: frontRedirectUrl + '/comprar',
-        pending: backRedirectUrl + "/pay/",
+        success: "http://localhost:" + process.env.PORT + "/pay/",
+        failure: "http://localhost:" + process.env.PORT + "/pay/",
+        pending: "http://localhost:" + process.env.PORT + "/pay/",
       },
       statement_descriptor: "Yazz Shows",
       auto_return: "approved",
@@ -85,6 +85,8 @@ const getPaymentInfo = async (req, res, next) => {
       order.payment_id = payment_id;
       order.payment_status = payment_status;
       order.merchant_order_id = merchant_order_id;
+      if (order.payment_status === "null")
+        return res.redirect(frontRedirectUrl);
       order.payment_status === "approved"
         ? (order.status = "Completed")
         : (order.status = "Canceled");
@@ -92,12 +94,7 @@ const getPaymentInfo = async (req, res, next) => {
       order
         .save()
         .then((_) => {
-          const isTest = process.env.NODE_ENV === "TEST";
-          const redirectUrl = isTest
-            ? "http://localhost:3000"
-            : "https://pg-front-henry.vercel.app";
-
-          return res.redirect(redirectUrl);
+          return res.redirect("http://localhost:3000");
         })
         .catch((err) => {
           console.error("error al guardar", err);
