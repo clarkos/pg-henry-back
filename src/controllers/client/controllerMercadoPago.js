@@ -9,6 +9,17 @@ mercadopago.configure({
 
 const payment = async (req, res, next) => {
   const order = req.body;
+
+  let backRedirectUrl = "";
+  let frontRedirectUrl = "";
+  if (process.env.NODE_ENV === "TEST") {
+     backRedirectUrl = "http://localhost:3001";
+     frontRedirectUrl = "http://localhost:3000";
+  }else{
+     backRedirectUrl = "https://pg-henry.up.railway.app";
+     frontRedirectUrl = "https://pg-front-henry.vercel.app";
+  }
+
   try {
     // VALIDACION CON DB
     // async function getById(id) {
@@ -26,6 +37,7 @@ const payment = async (req, res, next) => {
     // FIN VALIDACION DB
 
     // Configuro las preferencias requeridas por Mercadopago
+    
     const preference = {
       items: [
         {
@@ -42,9 +54,9 @@ const payment = async (req, res, next) => {
       },
       back_urls: {
         //rutas de acuerdo a como haya salido la transacion
-        success: "http://localhost:" + process.env.PORT + "/pay/",
-        failure: "http://localhost:" + process.env.PORT + "/pay/",
-        pending: "http://localhost:" + process.env.PORT + "/pay/",
+        success: backRedirectUrl + "/pay/",
+        failure: frontRedirectUrl + '/comprar',
+        pending: backRedirectUrl + "/pay/",
       },
       statement_descriptor: "Yazz Shows",
       auto_return: "approved",
@@ -54,7 +66,7 @@ const payment = async (req, res, next) => {
 
     return await mercadopago.preferences
       .create(preference)
-      .then((response) => {res.status(200).send({ response })});
+      .then((response) => res.status(200).send({ response }));
   } catch (error) {
     console.log(error);
     // next(error);
@@ -80,7 +92,12 @@ const getPaymentInfo = async (req, res, next) => {
       order
         .save()
         .then((_) => {
-          return res.redirect("http://localhost:3000");
+          const isTest = process.env.NODE_ENV === "TEST";
+          const redirectUrl = isTest
+            ? "http://localhost:3000"
+            : "https://pg-front-henry.vercel.app";
+
+          return res.redirect(redirectUrl);
         })
         .catch((err) => {
           console.error("error al guardar", err);
