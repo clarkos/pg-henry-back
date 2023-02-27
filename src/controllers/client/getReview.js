@@ -1,4 +1,5 @@
 const { Review } = require('../../db');
+const { Op } = require('sequelize');
 
 async function getReview(productId, userId) {
     const review = await Review.findOne({
@@ -10,8 +11,6 @@ async function getReview(productId, userId) {
             ]
         }
     });
-
-    console.log('getReview, review:', review);
 
     return review;
 }
