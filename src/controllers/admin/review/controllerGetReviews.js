@@ -51,6 +51,8 @@ const getReviews = async (page, size, sort, filter) => {
             productId: review.productId,
             message: review.message,
             stars: review.stars,
+            createdAt: review.createdAt,
+            updatedAt: review.updatedAt,
             status: review.status
         }))
     }

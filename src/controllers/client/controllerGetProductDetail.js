@@ -1,14 +1,14 @@
-const { Product, Photo, Category, Artist, Location, CategoryProduct} = require('../../db.js');
+const { Product, Photo, Category, Artist, Location } = require('../../db.js');
+const isShowFinished = require('./isShowFinished');
 
 const getProductDetail = async(id) => {
-    return await Product.findByPk(id,
+    const product = await Product.findByPk(id,
         {
           attributes: [
                 'id',
                 'name',
                 'Description', 
                 'StartDate',
-                'EndDate',
                 'Stock',
                 'Price',
                 'StartTime',
@@ -33,6 +33,10 @@ const getProductDetail = async(id) => {
             ]
         },
     );
+    
+    product.dataValues.isShowFinished = isShowFinished(product.dataValues.StartDate, product.dataValues.StartTime)
+
+    return product;
 };
 
 module.exports = { getProductDetail };
