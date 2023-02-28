@@ -1,16 +1,16 @@
 const { Router } = require('express');
-const { editCustomer } = require('../../../controllers/admin/customer/controllerPutCustomer');
+const { editCustomer } = require('../../controllers/admin/customer/controllerPutCustomer');
 
 const router = Router();
 
 // PUT /micuenta/customers/{id}
 router.put(
-    '/:id',
+    '/customers/:id',
     async (req, res, next) => {
         try {
             const { id } = req.params;
             const { name, address, city, state, zip, email, telephone, document, birthDate, status} = req.body;
-            console.log('put /user/:id req.body: ', req.body);
+            // console.log('put /micuenta/customers/:id req.body: ', req.body);
 
             const customer = await editCustomer(id, name, address, city, state, zip, email, telephone, document, birthDate, status);
 
