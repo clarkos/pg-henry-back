@@ -4,10 +4,8 @@ const { Sequelize, Transaction } = require('sequelize');
 const addEditOrderItems = async(data) => {
     const {orderId, items} = data;
     // items = [{productId, quantity}]
-    
     return sequelize.transaction(async function (orderTransaction) {
 
-        // obtengo encabezado de order
         const order = await Order.findByPk(orderId,  {lock: orderTransaction.LOCK.UPDATE});
         if (!order)
            throw new Error(`Orden no existe. Número de orden ${orderId}`);
@@ -32,15 +30,15 @@ const addEditOrderItems = async(data) => {
             if ( item.quantity > product.stock) 
                 throw new Error(`El producto ${product.name} no tiene stock disponible.`);             
 
-            // actualizo stock
-            await product.update(
-                {
-                    stock: product.stock - item.quantity,
-                }, 
-                {
-                    transaction: orderTransaction
-                }
-            );
+            //     // actualizo stock
+            // await product.update(
+            //     {
+            //         stock: product.stock - item.quantity,
+            //     }, 
+            //     {
+            //         transaction: orderTransaction
+            //     }
+            // );
 
             // agrego item al detalle de la compra
             const condition = {};
@@ -49,10 +47,9 @@ const addEditOrderItems = async(data) => {
             condition.where.productId = item.productId;
 
             let orderItem = await OrderItem.findOne(condition);
-
             if (orderItem) {
                 if ((orderItem.quantity + item.quantity) <= 0)  
-                throw new Error(`el item ${product.name} no puede tener cantidad menor que 0(cero).`);    
+                    throw new Error(`el item ${product.name} no puede tener cantidad menor que 0(cero).`);    
 
                 newAditionalTotal = item.quantity * orderItem.unitPrice;
                 orderItem.update(

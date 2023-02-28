@@ -55,14 +55,14 @@ const createOrder = async(data) => {
             totalValidator = totalValidator + item.totalAmount;
 
             // actualizo stock    
-            await product.update(
-                {
-                    stock: product.stock - item.quantity,
-                }, 
-                {
-                    transaction: orderTransaction
-                }
-            );
+            // await product.update(
+            //     {
+            //         stock: product.stock - item.quantity,
+            //     }, 
+            //     {
+            //         transaction: orderTransaction
+            //     }
+            // );
 
             // agrego item al detalle de la compra
             const response = await OrderItem.create(

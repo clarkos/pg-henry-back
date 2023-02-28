@@ -8,8 +8,8 @@ mercadopago.configure({
   access_token: process.env.ACCESS_TOKEN,
 });
 
-let backRedirectUrl = "";
-let frontRedirectUrl = "";
+const backRedirectUrl = "";
+const frontRedirectUrl = "";
 
 if (process.env.NODE_ENV === "TEST") {
   backRedirectUrl = "http://localhost:3001";
@@ -17,10 +17,10 @@ if (process.env.NODE_ENV === "TEST") {
 } else {
   backRedirectUrl = "https://pg-henry.up.railway.app";
   frontRedirectUrl = "https://pg-front-henry.vercel.app";
-}
 
-const payment = async (req, res, next) => {
-  const order = req.body;
+  const payment = async (req, res, next) => {
+    const order = req.body;
+  };
 
   try {
     // VALIDACION CON DB

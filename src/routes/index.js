@@ -1,6 +1,8 @@
 const { Router } = require('express');
-const routeGetAllProducts = require('./client/routeGetAllProducts');
+const routeGetProducts = require('./client/routeGetProducts');
 const routeGetRecommendedProducts = require('./client/routeGetRecommendedProducts');
+const routeGetFinishedProducts = require('./client/routeGetFinishedProducts');
+const routeGetReviews = require('./client/routeGetReviews');
 const routeGetProductDetail = require('./client/routeGetProductDetail');
 const routeGetAllCategories = require('./client/routeGetAllCategories');
 const routeGetDetailedUser = require('./client/routeGetDetailedUser');
@@ -22,23 +24,33 @@ const routeAddEditOrderItems = require('./client/routeAddEditOrderItems');
 const routeDeleteOrderItem = require('./client/routeDeleteOrderItem');
 const routeMailer = require('./client/routeSendMail')
 
-const miCuentaUserRouter = require('./client/user')
+// const miCuentaUserRouter = require('./client/user')
 const miCuentaCustomerRouter = require('./client/customer')
+const miCuentaOrdersRouter = require('./mi-cuenta/routeGetOrders');
+const miCuentaReviewsRouter = require('./mi-cuenta/routeGetReviews');
+
+const postCustomer = require("./admin/customer/routePostCustomer");
 
 const adminMiddleware = require('../middleware/adminMiddleware');
 const routePayment = require('./client/routePayment');
 
+const routePostReview = require('./client/routePostReview');
+
 const router = Router();
 
-router.use('/products', routeGetAllProducts);
+router.use('/products', routeGetProducts);
 router.use('/products', routeGetProductDetail);
+router.use('/products', routeGetReviews);
 router.use('/recommended-products', routeGetRecommendedProducts);
+router.use('/finished-products', routeGetFinishedProducts);
 router.use('/categories', routeGetAllCategories);
 
 router.use('/order', routeCreateOrder);
 router.use('/order/', routeAddEditOrderItems);
 router.use('/order/', routeDeleteOrderItem);
 router.use('/orders', routeGetFilteredOrder);
+router.use('/', orderRouter);
+router.use('/', customerRouter);
 
 // incorporo para la compra de MP, hacer require
 router.use("/pay", routePayment);
@@ -47,6 +59,11 @@ router.use('/user', routeGetDetailedUser);
 router.use('/user', routePostUser);
 router.use('/customer', routePostCustomer)
 router.use('/mailer', routeMailer);
+
+router.use('/customer', postCustomer);
+
+// Reviews
+router.use('/reviews', routePostReview);
 
 // Admin routes
 router.use('/admin', adminMiddleware.decodeToken, artistRouter);
@@ -60,7 +77,9 @@ router.use('/admin', adminMiddleware.decodeToken, reviewRouter);
 router.use('/admin', adminMiddleware.decodeToken, mailGenRouter);
 
 // Mi Cuenta routes
-router.use('/micuenta', miCuentaUserRouter);
+// router.use('/micuenta', miCuentaUserRouter);
 router.use('/micuenta', miCuentaCustomerRouter);
+router.use('/micuenta', miCuentaOrdersRouter);
+router.use('/micuenta', miCuentaReviewsRouter);
 
 module.exports = router;

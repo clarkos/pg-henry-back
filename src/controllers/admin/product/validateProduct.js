@@ -66,33 +66,6 @@ async function validateProduct(data) {
                 }
             };
         }
-        // endDate (ISO 8601 format)
-        if (!data.endDate) {
-            return {
-                errors: {
-                    endDate: constants.FIELD_REQUIRED
-                }
-            };
-        }
-        if (!isValidDate(data.endDate)) {
-            return {
-                errors: {
-                    endDate: constants.INVALID_DATA
-                }
-            };
-        }
-        // date range is valid ?
-        const startDate = DateTime.fromISO(data.startDate.slice(0, 10));
-        const endDate = DateTime.fromISO(data.endDate.slice(0, 10));
-        // console.log('startDate, endDate', startDate, endDate);
-        if (startDate > endDate) {
-            return {
-                errors: {
-                    startDate: constants.INVALID_RANGE,
-                    endDate: constants.INVALID_RANGE
-                }
-            };
-        }
         // startTime
         console.log('startTime: ', data.startTime)
         if (!data.startTime) {

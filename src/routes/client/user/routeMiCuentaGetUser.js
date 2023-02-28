@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const { getUser } = require('../../../controllers/admin/user/controllerGetUser');
+const { GetUserAndCustomerDetails } = require('../../../controllers/client/user/controllerMiCuentaGetUserAndCustomerDetails');
 
 
 const router = Router();
@@ -12,7 +13,7 @@ router.get(
         try {
             const { id } = req.params;
 
-            const user = await getUser(id);
+            const user = await GetUserAndCustomerDetails(id);
 
             res.status(200).json(user);
         } catch (error) {
