@@ -1,14 +1,15 @@
 const mercadopago = require("mercadopago");
 // si quiero validar con bd el customer
 // const { Customer } = require("../../models/Customer");
-const { Order } = require("../../db.js");
+const { Order, Product, OrderItem } = require("../../db.js");
+const { sequelize } = require("../../db");
 
 mercadopago.configure({
   access_token: process.env.ACCESS_TOKEN,
 });
 
-const backRedirectUrl = "";
-const frontRedirectUrl = "";
+let backRedirectUrl = "";
+let frontRedirectUrl = "";
 
 if (process.env.NODE_ENV === "TEST") {
   backRedirectUrl = "http://localhost:3001";
@@ -16,13 +17,12 @@ if (process.env.NODE_ENV === "TEST") {
 } else {
   backRedirectUrl = "https://pg-henry.up.railway.app";
   frontRedirectUrl = "https://pg-front-henry.vercel.app";
+}
 
-  const payment = async (req, res, next) => {
-    const order = req.body;
-  };
+const payment = async (req, res, next) => {
+  const order = req.body;
 
   try {
-
     // VALIDACION CON DB
     // async function getById(id) {
     //   const customer = await Customer.findByPk(id, {
@@ -73,6 +73,53 @@ if (process.env.NODE_ENV === "TEST") {
     console.log(error);
     // next(error);
   }
+};
+
+async function updateStock(orderId) {
+  let transaction;
+
+  try {
+    transaction = await sequelize.transaction();
+
+    const orderItems = await OrderItem.findAll({
+      where: { orderId },
+      attributes: ["productId", "quantity"],
+    });
+
+    console.log("UpdateStock: ", orderItems);
+    // Actualizar el stock de cada producto correspondiente
+    await Promise.all(
+      orderItems.map(async (item) => {
+        const product = await Product.findByPk(item.productId, { transaction });
+
+        // Mantener una copia temporal del stock original
+        const originalStock = product.stock;
+
+        // Actualizar el stock
+        product.stock = product.stock - item.quantity;
+
+        // Validar el nuevo stock
+        if (product.stock < 0) {
+          throw new Error(`Insufficient stock for product ${product.id}`);
+        }
+
+        // Guardar los cambios
+        await product.save({ transaction });
+
+        // En caso de error, restaurar el stock original
+        transaction.afterCommit(() => {
+          product.stock = originalStock;
+          product.save();
+        });
+      })
+    );
+
+    await transaction.commit();
+  } catch (error) {
+    if (transaction) await transaction.rollback();
+    console.error(error);
+    throw error;
+  }
 }
 
 // para recibir la info del pago
@@ -93,6 +140,15 @@ const getPaymentInfo = async (req, res, next) => {
         ? (order.status = "Completed")
         : (order.status = "Canceled");
 
+      if (order.status === "Completed") {
+        try {
+          updateStock(external_reference);
+        } catch (error) {
+          order.status = "Canceled";
+          console.log(error)
+          // Redireccionar a pagina que se avisa que el hubo un error en la compra y se devolverá el dinero
+        }
+      }
       order
         .save()
         .then((_) => {

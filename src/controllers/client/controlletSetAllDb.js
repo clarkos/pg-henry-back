@@ -840,6 +840,10 @@ const  setAllDb = async() => {
         {
             userName: "frissone@villaconstitucion.gov.ar",
             role: "Admin"
+        },
+        {
+            userName: "goya0310@gmail.com",
+            role: "User"
         }
     ]
 
@@ -882,6 +886,17 @@ const  setAllDb = async() => {
             document: 1111111,
             birthDate: "1986-03-05"
         },
+        {
+            userId: 7,
+            name: "Diego Llaya",
+            address: "Cordoba",
+            city: "Cordoba",
+            zip: "5000",
+            email: "goya0310@gmail.com",
+            telephone: "3513544346",
+            document: 31052062,
+            birthDate: "1984-10-03",
+        }
     ];
 
     await Customer.bulkCreate(customers);
