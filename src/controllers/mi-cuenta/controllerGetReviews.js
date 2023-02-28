@@ -1,5 +1,5 @@
 const { Op } = require('sequelize');
-const { Review } = require('../../db');
+const { Review, Product } = require('../../db');
 const { getPagination } = require('../../utils/utils');
 
 const getReviews = async (userId, page, size, sort, filter) => {
@@ -39,10 +39,16 @@ const getReviews = async (userId, page, size, sort, filter) => {
         ]
     };
 
-    console.log('options: ', productCondition);
+    options.include = [
+        {
+            model: Product,
+            attributes: ['id', 'name'],
+        }
+    ]
+    
     let reviews = await Review.findAndCountAll(options);
 
-    console.log('review: ', reviews.rows);
+    // console.log('review: ', reviews.rows);
 
     const response = {
         count: reviews.count,
@@ -54,11 +60,12 @@ const getReviews = async (userId, page, size, sort, filter) => {
             stars: review.stars,
             createdAt: review.createdAt,
             updatedAt: review.updatedAt,
-            status: review.status
+            status: review.status,
+            product: Product
         }))
     }
 
-    return response;
+    return reviews;
 }
 
 module.exports = { getReviews };

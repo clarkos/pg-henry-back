@@ -2,21 +2,22 @@ const { Router } = require('express');
 const { getReviews } = require('../../controllers/mi-cuenta/controllerGetReviews');
 const router = Router();
 
-// GET /micuenta/reviews/:userId
+// GET /micuenta/:userId/reviews
 router.get(
-    '/reviews/:userId',
+    '/:userId/reviews',
     async (req, res, next) => {
+        // console.log('En /micuenta/:userId/reviews');
         try {
             const { userId } = req.params;
             const { page, size, sort, filter } = req.query;
 
             // console.log('filter query: ', filter);
 
-            const orders = await getReviews(userId, page, size, sort, filter);
+            const reviews = await getReviews(userId, page, size, sort, filter);
 
-            res.status(200).json(orders);
+            res.status(200).json(reviews);
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             next(error)
         }
     }

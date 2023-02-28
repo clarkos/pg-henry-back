@@ -41,7 +41,7 @@ const getReviews = async (page, size, sort, filter) => {
     console.log('options: ', options);
     let reviews = await Review.findAndCountAll(options);
 
-    console.log('review: ', reviews.rows);
+    // console.log('review: ', reviews.rows);
 
     const response = {
         count: reviews.count,

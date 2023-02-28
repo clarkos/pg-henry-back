@@ -28,6 +28,7 @@ const routeMailer = require('./client/routeSendMail')
 const miCuentaCustomerRouter = require('./client/customer')
 const miCuentaOrdersRouter = require('./mi-cuenta/routeGetOrders');
 const miCuentaReviewsRouter = require('./mi-cuenta/routeGetReviews');
+const miCuentaReviewRouter = require('./mi-cuenta/routeGetReview');
 
 const postCustomer = require("./admin/customer/routePostCustomer");
 
@@ -80,6 +81,7 @@ router.use('/admin', adminMiddleware.decodeToken, mailGenRouter);
 // router.use('/micuenta', miCuentaUserRouter);
 router.use('/micuenta', miCuentaCustomerRouter);
 router.use('/micuenta', miCuentaOrdersRouter);
-router.use('/micuenta', miCuentaReviewsRouter);
+router.use('/micuenta', miCuentaReviewsRouter);  // /:userId/reviews
+router.use('/micuenta', miCuentaReviewRouter);   // /reviews/:id
 
 module.exports = router;
