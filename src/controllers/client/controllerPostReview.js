@@ -92,6 +92,23 @@ const createReview = async (data) => {
         );        
     }
 
+<<<<<<< HEAD
+    if (!data.message || data.message === "") {
+        throw new ValidationError(
+            'Validation error',
+            'La descripción de la review no puede estar vacia',
+=======
+    if (!Number.isInteger(data.stars)) {
+        throw new ValidationError(
+            'Validation error',
+            'Estrellas debe ser un campo entero entre 1 y 5',
+>>>>>>> develop
+            httpStatusCodes.BAD_REQUEST
+        );        
+    }
+
+<<<<<<< HEAD
+=======
     if (!data.message || data.message === "") {
         throw new ValidationError(
             'Validation error',
@@ -100,6 +117,7 @@ const createReview = async (data) => {
         );        
     }
 
+>>>>>>> develop
     // creo la review
     const review = await Review.create(
         {
