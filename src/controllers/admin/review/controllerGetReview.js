@@ -1,8 +1,8 @@
-const { Review } = require("../../../db");
+const { Review, Product } = require("../../../db");
 
 const getReview = async (id) => {
-  let review = await Review.findByPk(id);
-  // console.log('artist: ', artist);
+  let review = await Review.findByPk(id, {include: [{ model: Product }]});
+  // console.log('getReview review: ', review);
 
   return review;
 };

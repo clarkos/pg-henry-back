@@ -7,20 +7,22 @@ mercadopago.configure({
   access_token: process.env.ACCESS_TOKEN,
 });
 
-const payment = async (req, res, next) => {
-  const order = req.body;
 
-  let backRedirectUrl = "";
-  let frontRedirectUrl = "";
-  if (process.env.NODE_ENV === "TEST") {
-     backRedirectUrl = "http://localhost:3001";
-     frontRedirectUrl = "http://localhost:3000";
-  }else{
-     backRedirectUrl = "https://pg-henry.up.railway.app";
-     frontRedirectUrl = "https://pg-front-henry.vercel.app";
-  }
+let backRedirectUrl = "";
+let frontRedirectUrl = "";
 
+if (process.env.NODE_ENV === "TEST") {
+  backRedirectUrl = "http://localhost:3001";
+  frontRedirectUrl = "http://localhost:3000";
+} else {
+  backRedirectUrl = "https://pg-henry.up.railway.app";
+  frontRedirectUrl = "https://pg-front-henry.vercel.app";
+  };
+  const payment = async (req, res, next) => {
+    const order = req.body;
+=======
   try {
+
     // VALIDACION CON DB
     // async function getById(id) {
     //   const customer = await Customer.findByPk(id, {
@@ -37,7 +39,7 @@ const payment = async (req, res, next) => {
     // FIN VALIDACION DB
 
     // Configuro las preferencias requeridas por Mercadopago
-    
+
     const preference = {
       items: [
         {
@@ -54,9 +56,9 @@ const payment = async (req, res, next) => {
       },
       back_urls: {
         //rutas de acuerdo a como haya salido la transacion
-        success: "http://localhost:" + process.env.PORT + "/pay/",
-        failure: "http://localhost:" + process.env.PORT + "/pay/",
-        pending: "http://localhost:" + process.env.PORT + "/pay/",
+        success: backRedirectUrl + "/pay/",
+        failure: backRedirectUrl + "/pay/",
+        pending: frontRedirectUrl,
       },
       statement_descriptor: "Yazz Shows",
       auto_return: "approved",
@@ -64,14 +66,14 @@ const payment = async (req, res, next) => {
       binary_mode: true,
     };
 
-    return await mercadopago.preferences
-      .create(preference)
-      .then((response) => res.status(200).send({ response }));
+    return await mercadopago.preferences.create(preference).then((response) => {
+      res.status(200).send({ response });
+    });
   } catch (error) {
     console.log(error);
     // next(error);
   }
-};
+}
 
 // para recibir la info del pago
 const getPaymentInfo = async (req, res, next) => {
@@ -94,13 +96,10 @@ const getPaymentInfo = async (req, res, next) => {
       order
         .save()
         .then((_) => {
-          return res.redirect("http://localhost:3000");
+          return res.redirect(frontRedirectUrl);
         })
         .catch((err) => {
           console.error("error al guardar", err);
-          // return res.redirect(
-          //   `http://localhost:3000/?error=${err}&where=saving`
-          // );
         });
     });
   } catch (error) {
