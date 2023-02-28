@@ -20,7 +20,6 @@ if (process.env.NODE_ENV === "TEST") {
   };
   const payment = async (req, res, next) => {
     const order = req.body;
-=======
   try {
 
     // VALIDACION CON DB

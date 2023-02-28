@@ -92,6 +92,14 @@ const createReview = async (data) => {
         );        
     }
 
+    if (!Number.isInteger(data.stars)) {
+        throw new ValidationError(
+            'Validation error',
+            'Estrellas debe ser un campo entero entre 1 y 5',
+            httpStatusCodes.BAD_REQUEST
+        );        
+    }
+
     if (!data.message || data.message === "") {
         throw new ValidationError(
             'Validation error',
