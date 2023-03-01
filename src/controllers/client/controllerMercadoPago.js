@@ -1,12 +1,12 @@
 const mercadopago = require("mercadopago");
 // si quiero validar con bd el customer
 // const { Customer } = require("../../models/Customer");
-const { Order } = require("../../db.js");
+const { Order, Product, OrderItem } = require("../../db.js");
+const { sequelize } = require("../../db");
 
 mercadopago.configure({
   access_token: process.env.ACCESS_TOKEN,
 });
-
 
 let backRedirectUrl = "";
 let frontRedirectUrl = "";
@@ -17,11 +17,12 @@ if (process.env.NODE_ENV === "TEST") {
 } else {
   backRedirectUrl = "https://pg-henry.up.railway.app";
   frontRedirectUrl = "https://pg-front-henry.vercel.app";
-  };
-  const payment = async (req, res, next) => {
-    const order = req.body;
-  try {
+}
 
+const payment = async (req, res, next) => {
+  const order = req.body;
+
+  try {
     // VALIDACION CON DB
     // async function getById(id) {
     //   const customer = await Customer.findByPk(id, {
@@ -72,6 +73,74 @@ if (process.env.NODE_ENV === "TEST") {
     console.log(error);
     // next(error);
   }
+};
+
+async function updateStock(orderId) {
+  let transaction;
+  // Obtener todos los items de la orden
+  const orderItems = await OrderItem.findAll({
+    where: { orderId },
+    attributes: ["productId", "quantity"],
+  });
+
+  try {
+    // Iniciar una transacción
+    transaction = await sequelize.transaction();
+
+    // Validar que hay al menos un item de la orden
+    if (orderItems.length === 0) {
+      throw new Error("La orden no tiene items.");
+    }
+
+    // Actualizar el stock de cada producto correspondiente
+    await Promise.all(
+      orderItems.map(async (orderItem) => {
+        // Obtener el producto correspondiente al item de la orden
+        const productToUpdate = await Product.findByPk(orderItem.productId, {
+          transaction,
+        });
+
+        // Guardar una copia temporal del stock original
+        const originalStock = productToUpdate.stock;
+
+        // Actualizar el stock
+        productToUpdate.stock = productToUpdate.stock - orderItem.quantity;
+        
+        // Para ver si actualiza bien el stock
+        console.log(
+          `El nuevo stock del Producto con ID ${orderItem.productId}: `,
+          productToUpdate.stock
+        );
+
+        // Validar el nuevo stock
+        if (productToUpdate.stock < 0) {
+          throw new Error(
+            `Stock insuficiente para el producto ${productToUpdate.id}`
+          );
+        }
+
+        // Guardar los cambios
+        await productToUpdate.save({ transaction });
+      })
+    );
+
+    // Confirmar la transacción
+    await transaction.commit();
+  } catch (error) {
+    // Si hay un error, revertir la transacción y restaurar el stock original
+    if (transaction) {
+      await transaction.rollback();
+      await Promise.all(
+        orderItems.map(async (orderItem) => {
+          const productToUpdate = await Product.findByPk(orderItem.productId);
+          productToUpdate.stock = originalStock;
+          await productToUpdate.save();
+        })
+      );
+    }
+    console.error(error);
+    throw error;
+  }
 }
 
 // para recibir la info del pago
@@ -92,6 +161,15 @@ const getPaymentInfo = async (req, res, next) => {
         ? (order.status = "Completed")
         : (order.status = "Canceled");
 
+      if (order.status === "Completed") {
+        try {
+          updateStock(external_reference);
+        } catch (error) {
+          order.status = "Canceled";
+          console.log(error);
+          // Redireccionar a pagina que se avisa que el hubo un error en la compra y se devolverá el dinero
+        }
+      }
       order
         .save()
         .then((_) => {

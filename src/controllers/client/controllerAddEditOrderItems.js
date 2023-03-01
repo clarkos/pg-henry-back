@@ -27,9 +27,6 @@ const addEditOrderItems = async(data) => {
             if (product.status === 'Disabled') 
                 throw new Error(`El producto ${product.name} se encuentra inhabilitado para ser comprado.`); 
                     
-            if ( item.quantity > product.stock) 
-                throw new Error(`El producto ${product.name} no tiene stock disponible.`);             
-
             //     // actualizo stock
             // await product.update(
             //     {
@@ -50,6 +47,9 @@ const addEditOrderItems = async(data) => {
             if (orderItem) {
                 if ((orderItem.quantity + item.quantity) <= 0)  
                     throw new Error(`el item ${product.name} no puede tener cantidad menor que 0(cero).`);    
+
+                if ((orderItem.quantity + item.quantity) > product.stock) 
+                    throw new Error(`El producto ${product.name} no tiene stock disponible.`);             
 
                 newAditionalTotal = item.quantity * orderItem.unitPrice;
                 orderItem.update(
