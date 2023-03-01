@@ -832,7 +832,7 @@ const  setAllDb = async() => {
             role: "Admin"
         },
         {
-            userName: "silvestro.franco19@gmail",
+            userName: "silvestro.franco19@gmail.com",
             role: "Admin"
         }
     ]
@@ -979,7 +979,7 @@ const  setAllDb = async() => {
             city: "Mar del Plata",
             state: "BUENOS AIRES",
             zip: "9911",
-            email: "silvestro.franco19@gmail",
+            email: "silvestro.franco19@gmail.com",
             telephone: "11-9-8892-1111",
             document: 2111112,
             birthDate: "1977-04-24"

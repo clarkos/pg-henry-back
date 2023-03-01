@@ -106,6 +106,15 @@ async function updateStock(orderId) {
         // Actualizar el stock
         productToUpdate.stock = productToUpdate.stock - orderItem.quantity;
         
+        // Validar el nuevo stock
+        if (originalStock < orderItem.quantity) {
+          throw new Error(
+            `Stock insuficiente para el producto ${productToUpdate.id}`
+          );
+        }
+        // Actualizar el stock
+        productToUpdate.stock = originalStock - orderItem.quantity;
+
         // Para ver si actualiza bien el stock
         console.log(
           `El nuevo stock del Producto con ID ${orderItem.productId}: `,
@@ -140,6 +149,12 @@ async function updateStock(orderId) {
     }
     console.error(error);
     throw error;
+    // // Si hay un error, revertir la transacción y restaurar el stock original
+    // if (transaction) {
+    //   await transaction.rollback();
+    // }
+    console.error(error);
+    throw new Error("Orden cancelada por falta de stock");
   }
 }
 
@@ -157,9 +172,6 @@ const getPaymentInfo = async (req, res, next) => {
       order.merchant_order_id = merchant_order_id;
       if (order.payment_status === "null")
         return res.redirect(frontRedirectUrl);
-      order.payment_status === "approved"
-        ? (order.status = "Completed")
-        : (order.status = "Canceled");
 
       if (order.status === "Completed") {
         try {
@@ -170,6 +182,32 @@ const getPaymentInfo = async (req, res, next) => {
           // Redireccionar a pagina que se avisa que el hubo un error en la compra y se devolverá el dinero
         }
       }
+      const changeStatus = async () => {
+        if (order.payment_status === "approved") {
+          try {
+            await updateStock(external_reference);
+          } catch (error) {
+            // order.status = "Canceled";
+            console.log(error);
+          }
+        } else {
+          order.status = "Canceled";
+        }
+      };
+
+      changeStatus();
+      if (order.status === "Created") {
+        order.status = "Canceled";
+        order
+          .save()
+          .then((_) => {
+            return res.redirect(frontRedirectUrl + "/PaymentError");
+          })
+          .catch((err) => {
+            console.error("error al guardar paymentError", err);
+          });
+      }
+      if (order.status !== "Canceled") order.status = "Completed";
       order
         .save()
         .then((_) => {

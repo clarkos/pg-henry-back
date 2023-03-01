@@ -1,18 +1,19 @@
 const { Router } = require('express');
-const { getCustomer } = require('../../../controllers/admin/customer/controllerGetCustomer');
-
+const { getCustomer } = require('../../controllers/admin/customer/controllerGetCustomer');
 
 const router = Router();
-// GET /micuenta/customers/{id}
+// GET /micuenta/{id}
 router.get(
     '/:id',
     async (req, res, next) => {
         try {
             const { id } = req.params;
-            console.log("customer id: ", id)
             const customer = await getCustomer(id);
 
-            res.status(200).json(customer);
+            res.status(200).json({
+                count: customer ? 1 : 0,
+                rows: [ customer ]
+            });
         } catch (error) {
             next(error);
         }
