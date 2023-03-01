@@ -22,15 +22,7 @@ async function validateCustomer(data) {
         if (data.name.length < 4) {
             return {
                 errors: {
-                    name: 'El nombre debe tener al menos 2 letras',
-                }
-            };
-        }
-        // check for customers with the same name
-        if (await existCustomerByName(data.name.trim(), data.id)) {
-            return {
-                errors: {
-                    name: 'Nombre duplicado, ya lo tiene otro usuario',
+                    name: 'El nombre debe tener al menos 4 letras',
                 }
             };
         }
