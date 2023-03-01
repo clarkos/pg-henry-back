@@ -18,7 +18,7 @@ async function validateProduct(data) {
             };
         }
         // check for products with the same name
-        if (await existProduct(data.name.trim(), data.id)) {
+        if (await existProduct(data.name.trim(), data.Id)) {
             return {
                 errors: {
                     name: constants.DUPLICATED_NAME,

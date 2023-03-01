@@ -2,7 +2,7 @@ const { Router } = require('express');
 const { getOrders } = require('../../controllers/mi-cuenta/controllerGetOrders');
 const router = Router();
 
-// GET /micuenta/orders/:id
+// GET /micuenta/:customerId/orders
 router.get(
     '/:customerId/orders',
     async (req, res, next) => {
