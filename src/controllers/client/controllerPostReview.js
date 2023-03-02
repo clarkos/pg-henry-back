@@ -41,7 +41,8 @@ const createReview = async (data) => {
     }
 
     // check if customer can review product
-    if (!canReviewProduct(data.productId, data.CustomerId)) {
+    const canReview = await canReviewProduct(data.productId, data.CustomerId);
+    if (!canReview) {
         throw new ValidationError(
             'Validation error',
             'El cliente no puede hacer una review del producto',
