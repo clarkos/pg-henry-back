@@ -22,9 +22,7 @@ async function canReviewProduct(productId, customerId) {
         ]
     }
 
-    const orders = await Order.findOne(options);
-
-    return true;
+    return await Order.findOne(options);
 }
 
 module.exports = canReviewProduct;
