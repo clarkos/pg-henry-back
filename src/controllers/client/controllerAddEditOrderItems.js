@@ -49,7 +49,7 @@ const addEditOrderItems = async(data) => {
                     throw new Error(`el item ${product.name} no puede tener cantidad menor que 0(cero).`);    
 
                 if ((orderItem.quantity + item.quantity) > product.stock) 
-                    throw new Error(`El producto ${product.name} no tiene stock disponible.`);             
+                    throw new Error(`Al show de ${product.name} solo le quedan ${product.stock} entradas disponibles.`);             
 
                 newAditionalTotal = item.quantity * orderItem.unitPrice;
                 orderItem.update(
