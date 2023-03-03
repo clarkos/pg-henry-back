@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { editCustomer } = require('../../controllers/admin/customer/controllerPutCustomer');
+const { editCustomer } = require('../../controllers/mi-cuenta/controllerPutCustomer');
 
 const router = Router();
 
