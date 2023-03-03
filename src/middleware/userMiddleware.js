@@ -9,10 +9,8 @@ class UserMiddleware {
 			try {
 				const decodeValue = await admin.auth().verifyIdToken(token);
 				const user = await getDetailedUser(username)
-				if (decodeValue) {
-					if (user && user.dataValues.role === 'User') {
-						return next();
-					}
+				if (decodeValue && username === decodeValue.email && user && user.role === 'User') {
+					return next();
 				}
 				return res.status(403).json({ message: 'No autorizado' });
 			} catch (e) {
