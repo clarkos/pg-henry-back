@@ -12,7 +12,8 @@ const constants = {
     INVALID_RANGE: 'Field has an invalid range',
     MAX_LENGTH_EXCEEDED: 'The maximum length of the field has been exceeded',
     DUPLICATED_NAME: 'The name already exists',
-    EMAIL_NOTIFICATION_ERROR: 'Email notification error'
+    EMAIL_NOTIFICATION_ERROR: 'Email notification error',
+    EVENT_DATE_TIME_INVALID: 'The minimum date of the event must be 6 hours in advance'
 }
 
 module.exports = constants;
