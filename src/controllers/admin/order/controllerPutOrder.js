@@ -5,50 +5,77 @@ const ValidationError = require('../../../utils/validation-error');
 const mailer = require('../../../mailerAdmin');
 
 const editOrder = async (data) => {
-    // console.log('editOrder data: ', data);
     let order = await Order.findByPk(data.id);
 
+    if (order.status === data.status && order.isDelivered === data.isDelivered) {
+        return order;
+    }
+
     // Validate status change
-    // creada => procesando || cancelada
-    let isStatusOK = false;
-    if (order.status === 'Created' && ['Created', 'Processing', 'Canceled'].some(s => s === data.status)) {
-        // console.log('creada => procesando || cancelada');
-        isStatusOK = true;
-    }
-    // procesando => cancelada || completa
-    if (order.status === 'Processing' && ['Processing', 'Canceled', 'Completed'].some(s => s === data.status)) {
-        // console.log('procesando => cancelada || completa');
-        isStatusOK = true;
+    if (order.status !== data.status) {
+        // creada => procesando || cancelada
+        let isStatusOK = false;
+        if (order.status === 'Created' && ['Created', 'Processing', 'Canceled'].some(s => s === data.status)) {
+            // console.log('creada => procesando || cancelada');
+            isStatusOK = true;
+        }
+        // procesando => cancelada || completa
+        if (order.status === 'Processing' && ['Processing', 'Canceled', 'Completed'].some(s => s === data.status)) {
+            // console.log('procesando => cancelada || completa');
+            isStatusOK = true;
+        }
+    
+        if (!isStatusOK) {
+            throw new ValidationError(
+                'Validation error',
+                { errors: { status: constants.INVALID_ORDER_STATUS_CHANGE } },
+                httpStatusCodes.BAD_REQUEST
+            );
+        }
     }
 
-    if (!isStatusOK) {
-        throw new ValidationError(
-            'Validation error',
-            { errors: { status: constants.INVALID_ORDER_STATUS_CHANGE } },
-            httpStatusCodes.BAD_REQUEST
-        );
-    }
-
+    const statusPreviousValue = order.status;
+    const isDeliveredPreviousValue = order.isDelivered;
 
     await order.update({
-        status: data.status
+        status: data.status,
+        isDelivered: data.isDelivered,
+        deliveredDate: data.isDelivered ? new Date() : null
     });
 
-    // Send event to customer
     try {
         const mailGenConfig = await MailGen.findByPk(1);
         const to = data.Customer.email;
-        const subject = `YAZZ - Orden de pedido N° ${data.id} actualizado`;
-        const body = {
-            name: data.Customer.name,  // Nombre del sitio
-            greeting: mailGenConfig.greeting,
-            signature: mailGenConfig.signature,
-            intro: `Su pedido N° ${data.id} se ha actualizado al estado ${data.status}.`,
-            outro: "Acceda con sus datos al sitio para ver el detalle de su pedido."
+
+        // Send status change to customer
+        if (statusPreviousValue !== data.status) {
+            let subject = `YAZZ - Orden de pedido N° ${data.id} actualizado`;
+            let body = {
+                name: data.Customer.name,
+                greeting: mailGenConfig.greeting,
+                signature: mailGenConfig.signature,
+                intro: `Su pedido N° ${data.id} se ha actualizado al estado ${data.status}.`,
+                outro: "Acceda con sus datos al sitio para ver el detalle de su pedido."
+            }
+
+            await mailer(to, subject, body);
         }
 
-        await mailer(to, subject, body);
+        // Send delivery change to customer
+        if (isDeliveredPreviousValue !== data.isDelivered) {
+            subject = `YAZZ - Orden de pedido N° ${data.id} ${data.isDelivered ? 'entregada' : 'pendiente'}`;
+            body = {
+                name: data.Customer.name,
+                greeting: mailGenConfig.greeting,
+                signature: mailGenConfig.signature,
+                intro: data.isDelivered ? `Su pedido N° ${data.id} ha sido entregado.` : `Lo sentimos. Ha habido un error y su pedido N° ${data.id} no ha sido entregado.`,
+                outro: data.isDelivered ? "Gracias por su compra." : "Acceda con sus datos al sitio para ver el detalle de su pedido."
+            }
+    
+            await mailer(to, subject, body);
+        }
     } catch (error) {
+        // console.log('controllerPutOrder notification error', error);
         throw new ValidationError(
             'Email notification error',
             {
@@ -57,6 +84,8 @@ const editOrder = async (data) => {
             httpStatusCodes.INTERNAL_SERVER
         );
     }
+
+
 
     return order;
 }

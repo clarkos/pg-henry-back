@@ -19,9 +19,13 @@ module.exports = (sequelize) => {
             allowNull: false,
             field: 'OrderDate'
         },
-        shippingDate: {
+        deliveredDate: {
             type: DataTypes.DATEONLY,
-            field: 'ShippingDate'
+            field: 'DeliveredDate'
+        },
+        isDelivered: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
         },
         totalAmount: {
             type: PriceType,
