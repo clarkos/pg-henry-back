@@ -1,8 +1,16 @@
 const { Op } = require('sequelize');
-const { Review, Product } = require('../../db');
+const { Review, Product, User } = require('../../db');
 const { getPagination } = require('../../utils/utils');
+const httpStatusCodes = require('../../utils/http-status-codes');
+const ValidationError = require('../../utils/validation-error');
 
-const getReviews = async (userId, page, size, sort, filter) => {
+const getReviews = async (userId, page, size, sort, filter, userName) => {
+    // Check for valid user
+    let user = await User.findByPk(userId);
+    if (user && user.userName !== userName) {
+        throw new ValidationError('Auth error', 'auth error', httpStatusCodes.FORBIDDEN);
+    }
+
     const { limit, offset } = getPagination(page, size);
 
     const options = { limit, offset };
