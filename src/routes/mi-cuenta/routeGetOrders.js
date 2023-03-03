@@ -7,12 +7,13 @@ router.get(
     '/:customerId/orders',
     async (req, res, next) => {
         try {
+            const userName = req.headers.user
             const { customerId } = req.params;
             const { page, size, sort, filter } = req.query;
 
             // console.log('filter query: ', filter);
 
-            const orders = await getOrders(customerId, page, size, sort, filter);
+            const orders = await getOrders(customerId, page, size, sort, filter, userName);
 
             res.status(200).json(orders);
         } catch (error) {

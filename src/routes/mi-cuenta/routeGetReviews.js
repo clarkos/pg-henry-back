@@ -8,12 +8,13 @@ router.get(
     async (req, res, next) => {
         // console.log('En /micuenta/:userId/reviews');
         try {
+            const userName = req.headers.user
             const { userId } = req.params;
             const { page, size, sort, filter } = req.query;
 
             // console.log('filter query: ', filter);
 
-            const reviews = await getReviews(userId, page, size, sort, filter);
+            const reviews = await getReviews(userId, page, size, sort, filter, userName);
 
             res.status(200).json(reviews);
         } catch (error) {

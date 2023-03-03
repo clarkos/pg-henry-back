@@ -4,8 +4,8 @@ const {getDetailedUser} = require('../controllers/client/controllerGetDetailedUs
 class UserMiddleware {
 	async decodeToken(req, res, next) {
 		if (req.headers.authorization && req.headers.user) {
-			const token = req.headers.authorization.split(' ')[1];
-			const username = req.headers.user
+			const token = req.headers.authorization;
+			const username = req.headers.user;
 			try {
 				const decodeValue = await admin.auth().verifyIdToken(token);
 				const user = await getDetailedUser(username)
@@ -14,13 +14,13 @@ class UserMiddleware {
 						return next();
 					}
 				}
-				return res.json({ message: 'No autorizado' });
+				return res.status(403).json({ message: 'No autorizado' });
 			} catch (e) {
-				return res.json({ message: 'Internal Error' });
+				return res.status(403).json({ message: 'No autorizado' });
 			}
 		}
 		else{
-			return res.json({ message: 'No autorizado' });
+			return res.status(403).json({ message: 'No autorizado' });
 		}
 	}
 }

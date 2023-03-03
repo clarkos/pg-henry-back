@@ -18,6 +18,15 @@ async function validateProduct(data) {
             };
         }
 
+        // name length
+        if (data.name.length > 255) {
+            return {
+                errors: {
+                    name: constants.MAX_LENGTH_EXCEEDED,
+                }
+            };
+        }
+
         // check for products with the same name
         if (await existProduct(data.name.trim(), data.id)) {
             return {
@@ -68,7 +77,6 @@ async function validateProduct(data) {
             };
         }
         // startTime
-        console.log('startTime: ', data.startTime)
         if (!data.startTime) {
             return {
                 errors: {
@@ -83,6 +91,17 @@ async function validateProduct(data) {
                 }
             };
         }
+        // The next check is disabled because you can't edit a product when the event has finished.
+        // Check is start date + time is valid
+        // if (!isStartDateTimeValid(data.startDate, data.startTime)) {
+        //     return {
+        //         errors: {
+        //             startDate: constants.EVENT_DATE_TIME_INVALID,
+        //             startTime: constants.EVENT_DATE_TIME_INVALID
+        //         }
+        //     };
+        // }
+
         // Stock
         if (isNaN(data.stock)) {
             return {
@@ -113,6 +132,25 @@ async function validateProduct(data) {
                 }
             };
         }
+
+        // description
+        if (!data.description) {
+            return {
+                errors: {
+                    description: constants.FIELD_REQUIRED,
+                }
+            };
+        }
+
+        // description length
+        if (data.description.length > 500) {
+            return {
+                errors: {
+                    description: constants.MAX_LENGTH_EXCEEDED,
+                }
+            };
+        }
+
         // Categories
         console.log('Categories: ', data.categories);
         // if (!data.categories) {
@@ -197,6 +235,22 @@ function isValidTime(value) {
     let regex = new RegExp(/^([01]\d|2[0-3]):?([0-5]\d):?([0-5]\d)?$/);
 
     return value && regex.test(value);
+}
+
+function isStartDateTimeValid(startDate, startTime) {
+    try {
+        const dt = DateTime.now();
+        const now = dt.setZone("America/Argentina/Buenos_Aires").plus({ hours: 6 });
+
+        const newStartDate = startDate.slice(0, 10);
+        const newStartTime = startTime.length < 8 ? `${startTime}:00` : startTime;
+
+        let startEventDate = DateTime.fromISO(`${newStartDate}T${newStartTime}`, { zone: "America/Argentina/Buenos_Aires" });
+
+        return startEventDate > now;
+    } catch (error) {
+        return true;
+    }
 }
 
 module.exports = { validateProduct };
