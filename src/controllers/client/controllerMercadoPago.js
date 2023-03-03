@@ -1,8 +1,12 @@
 const mercadopago = require("mercadopago");
 // si quiero validar con bd el customer
 // const { Customer } = require("../../models/Customer");
-const { Order, Product, OrderItem } = require("../../db.js");
+const { Order, Product, OrderItem, MailGen, Customer} = require("../../db.js");
 const { sequelize } = require("../../db");
+const mailer = require('../../mailerAdmin');
+const ValidationError = require('../../utils/validation-error');
+const constants = require('../../utils/constants');
+const httpStatusCodes = require('../../utils/http-status-codes');
 
 mercadopago.configure({
   access_token: process.env.ACCESS_TOKEN,
@@ -142,11 +146,41 @@ const getPaymentInfo = async (req, res, next) => {
   const external_reference = req.query.external_reference;
   const merchant_order_id = req.query.merchant_order_id;
 
+  async function sendMail(customerId, orderId) {
+    // Send event to customer
+    try {
+      const customer = await Customer.findByPk(customerId);
+      const to = customer.email;
+      const subject = `YAZZ - Compra realizada con éxito. Pedido N° ${orderId}`;
+      const body = {
+          name: customer.name,  // Nombre del sitio
+          greeting: "Hola",
+          signature: "Saludos cordiales",
+          intro: `Hemos recibido el pago por su pedido N° ${orderId}.`,
+          outro: 
+            "Acceda con sus datos al sitio para ver el detalle de su pedido." +
+            "Ya puede pasar a retirar sus entradas." +
+            "Las entradas solo serán entregadas con DNI en mano."
+      }
+      await mailer(to, subject, body);
+    } catch (error) {
+       console.log(error);
+      // throw new ValidationError(
+      //     'Email notification error',
+      //     {
+      //         notificationError: constants.EMAIL_NOTIFICATION_ERROR
+      //     },
+      //     httpStatusCodes.INTERNAL_SERVER
+      // );
+    }
+  }
+
   try {
     Order.findByPk(external_reference).then((order) => {
       order.payment_id = payment_id;
       order.payment_status = payment_status;
       order.merchant_order_id = merchant_order_id;
+
       if (order.payment_status === "null")
         return res.redirect(frontRedirectUrl);
       if (order.payment_status === "rejected") {
@@ -161,6 +195,7 @@ const getPaymentInfo = async (req, res, next) => {
             // Si la actualización del stock es exitosa, actualizar el estado de la orden a "Completed"
             order.status = "Completed";
             order.save();
+            sendMail(order.customerId, order.id);
             return res.redirect(frontRedirectUrl + "/PaymentComplete");
           })
           .catch((error) => {
