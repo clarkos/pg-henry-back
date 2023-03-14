@@ -11,9 +11,11 @@ Actualmente las versiónes necesarias son:
 
 - __Node__: 12.18.3 o mayor
 - __NPM__: 6.14.16 o mayor
-
-En `api` crear un archivo llamado: `.env` que tenga la siguiente forma:
+<br/><br/><br/>
+> ### Documentacion del proyecto en progreso...
 <!--
+En `api` crear un archivo llamado: `.env` que tenga la siguiente forma:
+
 ```env
 DB_USER=usuariodepostgres
 DB_PASSWORD=passwordDePostgres
